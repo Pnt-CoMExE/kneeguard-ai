@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proof of Concept Demo — KneeGuard AI</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 14c3-8 6-10 8-10s5 2 8 10"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        <span class="brand-text">
+          KneeGuard AI
+          <small>Selected Topics · DS &amp; AI</small>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Problem</a></li>
+        <li><a href="data.html">Dataset</a></li>
+        <li><a href="model.html">Model</a></li>
+        <li><a class="nav-cta is-active" href="demo.html">Live Demo</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-hero">
+      <p class="eyebrow">Proof of concept · User-interface prototype</p>
+      <h1>Mock inference console</h1>
+      <p>
+        Select a sample study, run placeholder inference, and review triage guidance.
+        Probabilities are simulated in the browser — not from a trained model.
+      </p>
+    </div>
+
+    <section class="section" style="padding-top:1.5rem;">
+      <div class="note-banner" role="status">
+        Demo disclaimer: outputs are deterministic mock values for UX review only. Replace with teammate model results later.
+      </div>
+
+      <div class="demo-shell">
+        <div class="demo-panel">
+          <h2>Study input</h2>
+
+          <div class="field">
+            <label for="studySelect">Study ID</label>
+            <select id="studySelect">
+              <option value="study_00421">study_00421 — sports injury pathway</option>
+              <option value="study_01108">study_01108 — degenerative pattern</option>
+              <option value="study_01955">study_01955 — trauma / high-risk flags</option>
+            </select>
+          </div>
+
+          <p class="muted" style="margin:0 0 0.35rem;font-size:0.8rem;letter-spacing:0.04em;text-transform:uppercase;">
+            Mock MRI series thumbnails
+          </p>
+          <div class="scan-grid" id="scanGrid" aria-hidden="true">
+            <div class="scan-tile is-active" data-label="Sag PD"></div>
+            <div class="scan-tile" data-label="Cor T2"></div>
+            <div class="scan-tile" data-label="Ax PD"></div>
+          </div>
+
+          <div class="field">
+            <label for="reportBox">Training-time report snippet (not available at test)</label>
+            <textarea id="reportBox" readonly></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="button" id="runInference">Run inference</button>
+          <button class="btn btn-ghost" type="button" id="resetDemo" style="margin-left:0.5rem;">Reset</button>
+        </div>
+
+        <div class="demo-panel">
+          <h2>Predicted findings</h2>
+          <p class="muted" style="margin-top:-0.35rem;margin-bottom:1rem;font-size:0.9rem;">
+            Twelve-label probability panel · updates after Run inference
+          </p>
+          <div class="findings" id="findingsList"></div>
+
+          <div class="action-box" id="actionBox" data-level="low">
+            <h3 id="actionTitle">Awaiting inference</h3>
+            <p id="actionText">Select a study and run the mock model to generate triage guidance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong style="color:var(--text);">KneeGuard AI</strong> · Demo page<br />
+        Light JavaScript only · no backend · no database
+      </div>
+      <div>
+        <a href="index.html">← Back to problem overview</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs & caches
+*.log
+.cache/
+tmp/
+temp/
+
+# Python / Node (if added later)
+__pycache__/
+*.pyc
+node_modules/
+dist/
+.venv/
+venv/
+
+# Local override
+*.local

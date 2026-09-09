@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dataset &amp; Data Model — KneeGuard AI</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 14c3-8 6-10 8-10s5 2 8 10"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        <span class="brand-text">
+          KneeGuard AI
+          <small>Selected Topics · DS &amp; AI</small>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Problem</a></li>
+        <li><a class="is-active" href="data.html">Dataset</a></li>
+        <li><a href="model.html">Model</a></li>
+        <li><a class="nav-cta" href="demo.html">Live Demo</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-hero">
+      <p class="eyebrow">Part 2 · Dataset and data model</p>
+      <h1>Dataset description</h1>
+      <p>
+        Public competition dataset pairing knee MRI studies with multilingual radiology reports for twelve abnormality labels.
+        Figures marked <span class="placeholder">PLACEHOLDER</span> will be replaced with teammate analysis.
+      </p>
+    </div>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Dataset information card</h2>
+        <p>Required fields from the project guidance table.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Dataset item</th>
+              <th>Project information</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dataset name</td>
+              <td>RSNA Knee Abnormality Detection</td>
+            </tr>
+            <tr>
+              <td>Dataset provider or owner</td>
+              <td>Radiological Society of North America (RSNA) via Kaggle</td>
+            </tr>
+            <tr>
+              <td>Dataset source or URL</td>
+              <td>
+                <a href="https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/data" target="_blank" rel="noopener">
+                  kaggle.com/competitions/rsna-knee-abnormality-detection/data
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Data-collection period</td>
+              <td><span class="placeholder">PLACEHOLDER</span> — confirm from dataset docs / teammate notes</td>
+            </tr>
+            <tr>
+              <td>Number of records</td>
+              <td>~5,000+ knee MRI exams (train); ~1,300 studies in test set (competition statement)</td>
+            </tr>
+            <tr>
+              <td>Number of attributes / targets</td>
+              <td>Twelve binary abnormality labels per study + imaging series + report text (train)</td>
+            </tr>
+            <tr>
+              <td>Data format</td>
+              <td>DICOM series per study; CSV metadata; radiology report text</td>
+            </tr>
+            <tr>
+              <td>Target variable(s)</td>
+              <td>Multilabel probabilities for 12 findings (0/1 training labels where available)</td>
+            </tr>
+            <tr>
+              <td>License or usage conditions</td>
+              <td>Subject to Kaggle / RSNA competition rules</td>
+            </tr>
+            <tr>
+              <td>Date accessed</td>
+              <td><span class="placeholder">PLACEHOLDER</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split">
+        <div class="prose">
+          <div class="section-head">
+            <h2>Dataset relevance</h2>
+          </div>
+          <p>
+            The dataset is suitable because it directly encodes the decision task: estimate clinically important knee
+            findings from real multi-site MRI exams. Training-time reports support weak labeling and multimodal learning;
+            inference-time reports are not provided, matching a realistic deployment constraint.
+          </p>
+          <p>
+            Diversity across scanners, protocols, languages, and sites strengthens external validity, but also introduces
+            domain shift. Prevalence of abnormalities may differ across train / public / private splits.
+          </p>
+          <p>
+            <span class="placeholder">PLACEHOLDER</span>
+            Add teammate notes on completeness, population coverage, and bias after EDA.
+          </p>
+        </div>
+        <div>
+          <div class="section-head">
+            <h2>Known limitations</h2>
+          </div>
+          <ul class="list-check">
+            <li>Only a subset of training studies may carry full per-condition labels.</li>
+            <li>Intensities, orientations, and resolutions vary across series.</li>
+            <li>Transfer syntaxes and metadata are constrained / stripped.</li>
+            <li>Class imbalance is expected across rare findings.</li>
+            <li>Report language diversity complicates text pipelines.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Data dictionary (core targets)</h2>
+        <p>Twelve clinically important findings used as multilabel targets.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Data type</th>
+              <th>Description</th>
+              <th>Example</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>study_id</td>
+              <td>Identifier</td>
+              <td>Unique exam / study key</td>
+              <td>study_00421</td>
+              <td>Identifier</td>
+            </tr>
+            <tr>
+              <td>ACL</td>
+              <td>Binary</td>
+              <td>Anterior cruciate ligament abnormality</td>
+              <td>1</td>
+              <td>Target</td>
+            </tr>
+            <tr>
+              <td>PCL / collateral / meniscus*</td>
+              <td>Binary</td>
+              <td>Ligament and meniscus injury labels</td>
+              <td>0/1</td>
+              <td>Target</td>
+            </tr>
+            <tr>
+              <td>OA medial / lateral / PF*</td>
+              <td>Binary</td>
+              <td>Osteoarthritis by compartment</td>
+              <td>0/1</td>
+              <td>Target</td>
+            </tr>
+            <tr>
+              <td>Joint effusion</td>
+              <td>Binary</td>
+              <td>Presence of joint effusion</td>
+              <td>1</td>
+              <td>Target</td>
+            </tr>
+            <tr>
+              <td>Synovitis</td>
+              <td>Binary</td>
+              <td>Inflammation of joint lining</td>
+              <td>0</td>
+              <td>Target</td>
+            </tr>
+            <tr>
+              <td>Baker's cyst</td>
+              <td>Binary</td>
+              <td>Popliteal (Baker’s) cyst</td>
+              <td>0</td>
+              <td>Target</td>
+            </tr>
+            <tr>
+              <td>Bone contusion</td>
+              <td>Binary</td>
+              <td>Bone contusion finding</td>
+              <td>1</td>
+              <td>Target</td>
+            </tr>
+            <tr>
+              <td>Fracture</td>
+              <td>Binary</td>
+              <td>Fracture finding</td>
+              <td>0</td>
+              <td>Target</td>
+            </tr>
+            <tr>
+              <td>Report</td>
+              <td>Text</td>
+              <td>Original radiology report (train only)</td>
+              <td>“ACL partial tear…”</td>
+              <td>Input feature / weak label source</td>
+            </tr>
+            <tr>
+              <td>DICOM series</td>
+              <td>Image sequences</td>
+              <td>Multi-sequence MRI slices for one study</td>
+              <td>series folders</td>
+              <td>Input feature</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:0.75rem;">
+        * Exact official column names will be locked to the competition CSV schema —
+        <span class="placeholder">PLACEHOLDER</span> for final naming from teammate extraction.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Data quality &amp; preprocessing plan</h2>
+        <p>Issues to examine and planned handling (editable).</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Issue</th>
+              <th>Observation plan</th>
+              <th>Handling (draft)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Missing labels</td>
+              <td>Count unlabeled studies / findings</td>
+              <td>Weak supervision from reports; exclude from supervised loss when unknown</td>
+            </tr>
+            <tr>
+              <td>Class imbalance</td>
+              <td>Prevalence per finding</td>
+              <td>Class weights / focal loss / sampling — <span class="placeholder">TBD</span></td>
+            </tr>
+            <tr>
+              <td>Intensity / protocol shift</td>
+              <td>Scanner / site metadata summaries</td>
+              <td>Normalization, series selection heuristics</td>
+            </tr>
+            <tr>
+              <td>Duplicates / leakage</td>
+              <td>Study ID uniqueness; patient-level checks if available</td>
+              <td>Deduplicate; group-aware splits</td>
+            </tr>
+            <tr>
+              <td>Sensitive information</td>
+              <td>Review DICOM tags / report text</td>
+              <td>Use competition-stripped tags; avoid exporting PHI</td>
+            </tr>
+            <tr>
+              <td>Multilingual reports</td>
+              <td>Language distribution</td>
+              <td>Multilingual encoder or translation pipeline — <span class="placeholder">TBD</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Exploratory data analysis (mock visuals)</h2>
+        <p>At least three analyses with titles, labels, and decision-relevant interpretation. Charts are illustrative placeholders.</p>
+      </div>
+      <div class="grid-3">
+        <article class="viz-block">
+          <h3>Finding prevalence (mock)</h3>
+          <div class="chart-mock" aria-hidden="true">
+            <div class="bar" style="height:42%"></div>
+            <div class="bar" style="height:28%"></div>
+            <div class="bar" style="height:65%"></div>
+            <div class="bar" style="height:38%"></div>
+            <div class="bar" style="height:22%"></div>
+            <div class="bar" style="height:50%"></div>
+            <div class="bar" style="height:18%"></div>
+            <div class="bar" style="height:33%"></div>
+          </div>
+          <p class="caption">
+            Interpretation: some findings appear rarer than others, so metrics must not hide minority classes.
+            Relevance: motivates macro-averaged AUC and class-aware training.
+          </p>
+        </article>
+        <article class="viz-block">
+          <h3>Label co-occurrence (mock)</h3>
+          <div class="donut-mock" aria-hidden="true"></div>
+          <p class="caption">
+            Interpretation: effusion and osteoarthritis may co-occur more often than chance.
+            Relevance: multilabel modeling should allow correlated outputs rather than independent one-vs-rest only.
+          </p>
+        </article>
+        <article class="viz-block">
+          <h3>Site / language mix (mock)</h3>
+          <div class="chart-mock" aria-hidden="true">
+            <div class="bar" style="height:70%"></div>
+            <div class="bar" style="height:55%"></div>
+            <div class="bar" style="height:40%"></div>
+            <div class="bar" style="height:48%"></div>
+            <div class="bar" style="height:30%"></div>
+            <div class="bar" style="height:36%"></div>
+          </div>
+          <p class="caption">
+            Interpretation: multi-site and multilingual reports create domain shift.
+            Relevance: validation should stress generalization, not only in-distribution accuracy.
+          </p>
+        </article>
+      </div>
+      <p class="muted" style="margin-top:1rem;">
+        <span class="placeholder">PLACEHOLDER</span>
+        Replace mock bars with teammate EDA exports (PNG/SVG) when ready.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Data model / pipeline</h2>
+        <p>How data are organized from source to model-ready features.</p>
+      </div>
+      <div class="diagram" aria-label="Data pipeline diagram">
+        <div class="diagram-track">
+          <div class="diagram-node">DICOM series<br /><span class="muted">images</span></div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-node">Preprocess<br /><span class="muted">norm / select</span></div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-node">Image encoder<br /><span class="muted">features</span></div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-node">Feature table<br /><span class="muted">per study</span></div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-node">12 targets<br /><span class="muted">labels</span></div>
+        </div>
+        <div class="diagram-track" style="margin-top:0.85rem;">
+          <div class="diagram-node">Radiology report<br /><span class="muted">train text</span></div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-node">NLP / LLM parse<br /><span class="muted">weak labels</span></div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-node">Join on study_id<br /><span class="muted">multimodal</span></div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-node">Train / val splits<br /><span class="muted">group-aware</span></div>
+          <div class="diagram-arrow">→</div>
+          <div class="diagram-node">Inference CSV<br /><span class="muted">probabilities</span></div>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:0.85rem;">
+        Entities: Study, Series, Slice/Frame, Report, FindingLabel, ModelRun.
+        Relationships: Study 1—N Series; Study 1—1 Report (train); Study 1—N FindingLabel.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong style="color:var(--text);">KneeGuard AI</strong> · Dataset page<br />
+        No backend or database in this mockup — tables are static HTML.
+      </div>
+      <div>
+        <a href="model.html">Next: Decision model →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

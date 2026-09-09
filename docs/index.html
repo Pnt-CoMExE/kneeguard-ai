@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KneeGuard AI — RSNA Knee Abnormality Detection</title>
+  <meta name="description" content="Course project mockup: multimodal AI for detecting clinically important knee abnormalities on MRI." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 14c3-8 6-10 8-10s5 2 8 10"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        <span class="brand-text">
+          KneeGuard AI
+          <small>Selected Topics · DS &amp; AI</small>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a class="is-active" href="index.html">Problem</a></li>
+        <li><a href="data.html">Dataset</a></li>
+        <li><a href="model.html">Model</a></li>
+        <li><a class="nav-cta" href="demo.html">Live Demo</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow">RSNA Knee Abnormality Detection · Project Mockup</p>
+        <h1>KneeGuard AI</h1>
+        <p class="hero-lead">
+          Multimodal decision support for detecting twelve clinically important knee abnormalities from MRI studies and radiology context.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="demo.html">Open proof of concept</a>
+          <a class="btn btn-ghost" href="data.html">Explore the dataset</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>End-to-end decision chain</h2>
+        <p>Aligned with the course framework: Problem → Dataset → Data Model → Analytical/AI Model → Decision → Action.</p>
+      </div>
+      <div class="pipeline" aria-label="Project pipeline">
+        <div class="pipeline-step"><span>01</span>Problem</div>
+        <div class="pipeline-step"><span>02</span>Dataset</div>
+        <div class="pipeline-step"><span>03</span>Data Model</div>
+        <div class="pipeline-step"><span>04</span>AI Model</div>
+        <div class="pipeline-step"><span>05</span>Decision</div>
+        <div class="pipeline-step"><span>06</span>Action</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split">
+        <div class="prose">
+          <div class="section-head">
+            <h2>Problem background</h2>
+            <p>Part 1 · Problem identification and justification</p>
+          </div>
+          <p>
+            Knee MRI can reveal multiple injuries in a single exam—ligament tears, meniscal damage, osteoarthritis,
+            effusion, synovitis, Baker’s cyst, bone contusion, and fracture. Interpretation quality varies, and access
+            to specialty-trained musculoskeletal radiologists is limited in many settings.
+          </p>
+          <p>
+            The <strong>RSNA 2026 Knee Abnormality Detection</strong> challenge asks teams to build multimodal models
+            that estimate the probability of twelve clinically important findings per study, using imaging data paired
+            with original radiology reports during training.
+          </p>
+          <div class="callout">
+            <strong>Decision statement:</strong>
+            The proposed model will help radiologists and triage teams classify clinically important knee abnormalities
+            by using multimodal knee MRI series and (training-time) radiology report text.
+          </div>
+          <p>
+            <span class="placeholder">PLACEHOLDER</span>
+            Evidence citations, local hospital statistics, and teammate research notes will be inserted here.
+          </p>
+        </div>
+        <aside>
+          <div class="section-head">
+            <h2>Why it matters</h2>
+          </div>
+          <ul class="list-check">
+            <li>Single scans may contain multiple concurrent abnormalities.</li>
+            <li>Specialty expertise is unevenly distributed across sites.</li>
+            <li>Consistent triage can reduce delayed follow-up for high-risk findings.</li>
+            <li>Multimodal training (image + report) can improve label coverage where only a subset of studies is fully annotated.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Healthcare</span>
+            <span class="tag">Multilabel classification</span>
+            <span class="tag">MRI + text</span>
+            <span class="tag">Macro AUC-ROC</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Stakeholders &amp; decision requirements</h2>
+        <p>Who experiences the problem, and what information do they need?</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Stakeholder</th>
+              <th>Role in the problem</th>
+              <th>Information or decision required</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Musculoskeletal radiologist</td>
+              <td>Decision maker / expert reviewer</td>
+              <td>Per-finding probabilities and prioritized review list</td>
+            </tr>
+            <tr>
+              <td>Emergency / ortho clinician</td>
+              <td>Downstream care provider</td>
+              <td>High-risk flags (e.g., fracture, ligament injury) for action</td>
+            </tr>
+            <tr>
+              <td>Imaging center / hospital IT</td>
+              <td>System operator</td>
+              <td>Runtime limits, audit trail, integration constraints</td>
+            </tr>
+            <tr>
+              <td>Patient</td>
+              <td>Affected party</td>
+              <td>Timely, accurate diagnosis pathway (indirect user)</td>
+            </tr>
+            <tr>
+              <td><span class="placeholder">TEAM INPUT</span></td>
+              <td>Additional stakeholder from partner research</td>
+              <td>To be confirmed with teammate materials</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split">
+        <div>
+          <div class="section-head">
+            <h2>Project objectives</h2>
+            <p>Two to four measurable objectives (placeholders until research lock-in).</p>
+          </div>
+          <ol class="list-check" style="list-style: none;">
+            <li>Examine relationships between MRI study characteristics and the twelve labeled abnormalities.</li>
+            <li>Develop a multilabel model that estimates per-finding probabilities for each knee MRI study.</li>
+            <li>Translate model outputs into triage decision rules for radiologist review prioritization.</li>
+            <li>
+              <span class="placeholder">PLACEHOLDER</span>
+              Add a teammate-specific objective (e.g., report-text weakly supervised labeling).
+            </li>
+          </ol>
+        </div>
+        <div>
+          <div class="section-head">
+            <h2>Project questions</h2>
+          </div>
+          <ul class="list-check">
+            <li>Which imaging / derived features are most relevant to each finding?</li>
+            <li>What patterns appear across sites, scanners, and languages?</li>
+            <li>Which model family best supports multilabel detection under competition constraints?</li>
+            <li>How should probabilities map to practical triage actions with human oversight?</li>
+            <li>How will success be measured beyond leaderboard score?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Site map for this mockup</h2>
+        <p>Content mirrors the course report structure; research numbers remain editable placeholders.</p>
+      </div>
+      <div class="grid-3">
+        <a class="viz-block" href="data.html" style="text-decoration:none;color:inherit;">
+          <h3>Dataset &amp; data model</h3>
+          <p class="caption">Dataset card, dictionary, quality plan, EDA mocks, and pipeline diagram.</p>
+        </a>
+        <a class="viz-block" href="model.html" style="text-decoration:none;color:inherit;">
+          <h3>Decision model</h3>
+          <p class="caption">Architecture, workflow, evaluation plan, decision rules, ethics.</p>
+        </a>
+        <a class="viz-block" href="demo.html" style="text-decoration:none;color:inherit;">
+          <h3>Proof of concept</h3>
+          <p class="caption">Interactive mock inference UI with placeholder probabilities.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong style="color:var(--text);">KneeGuard AI</strong><br />
+        Course mockup for 1501418 Selected Topics in Data Science and AI<br />
+        Dataset reference:
+        <a href="https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/overview" target="_blank" rel="noopener">RSNA Knee Abnormality Detection (Kaggle)</a>
+      </div>
+      <div>
+        Group members: <span class="placeholder">TBD</span><br />
+        Status: static HTML/CSS + light JS · no backend / database
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

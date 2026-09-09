@@ -1,0 +1,23 @@
+---
+description: Always ask clarifying questions first, then present an implementation plan for approval before coding
+alwaysApply: true
+---
+
+# Ask First, Then Plan, Then Code
+
+## Mandatory workflow
+
+1. **Ask before acting** — If anything is unclear, ambiguous, or missing (requirements, content, design, scope, file paths, tech choices), ask the user first. Do not guess and proceed.
+2. **Implementation plan before real work** — Before creating or changing project files for a feature or page, present a short implementation plan and wait for user approval.
+3. **No silent scope expansion** — Do not add pages, libraries, or features that were not agreed in the plan.
+
+## Exceptions
+
+- Creating/updating Cursor rules when the user explicitly asked for them
+- Tiny clarifying edits the user already approved in the same turn
+
+## Response style when blocked
+
+- List concrete questions
+- Optionally draft a plan marked **pending approval**
+- Do not start implementation until the user confirms
