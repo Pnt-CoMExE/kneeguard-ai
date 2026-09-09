@@ -3,104 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Proof of Concept Demo — KneeGuard AI</title>
+  <title>Proof-of-Concept Demo — KneeGuard AI</title>
+  <meta name="description" content="Interactive mock inference console for KneeGuard AI. Select a study and run placeholder inference to explore triage guidance." />
+  <meta property="og:title"       content="Proof-of-Concept Demo — KneeGuard AI" />
+  <meta property="og:description" content="Mock inference UI — twelve-finding probability panel and triage decision support." />
+  <meta property="og:type"        content="website" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="nav-wrap">
       <a class="brand" href="index.html">
-        <span class="brand-mark" aria-hidden="true">
+        <span class="brand-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M4 14c3-8 6-10 8-10s5 2 8 10"/><circle cx="12" cy="12" r="3"/></svg>
         </span>
         <span class="brand-text">
           KneeGuard AI
-          <small>Selected Topics · DS &amp; AI</small>
+          <span class="brand-sub">Selected Topics · DS &amp; AI</span>
         </span>
       </a>
-      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <ul class="nav-links">
+      <ul class="nav-links" role="list">
         <li><a href="index.html">Problem</a></li>
         <li><a href="data.html">Dataset</a></li>
         <li><a href="model.html">Model</a></li>
-        <li><a class="nav-cta is-active" href="demo.html">Live Demo</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="demo.html" class="nav-cta is-active" aria-current="page">Live Demo</a></li>
       </ul>
     </div>
   </header>
 
-  <main>
-    <div class="page-hero">
-      <p class="eyebrow">Proof of concept · User-interface prototype</p>
-      <h1>Mock inference console</h1>
-      <p>
-        Select a sample study, run placeholder inference, and review triage guidance.
-        Probabilities are simulated in the browser — not from a trained model.
-      </p>
-    </div>
+  <main id="main-content">
+    <div class="page-container">
 
-    <section class="section" style="padding-top:1.5rem;">
-      <div class="note-banner" role="status">
-        Demo disclaimer: outputs are deterministic mock values for UX review only. Replace with teammate model results later.
+      <div class="page-header animate-rise">
+        <p class="eyebrow">Proof of concept · UI prototype</p>
+        <h1>Mock inference console</h1>
+        <p class="lead">
+          Select a sample study, run placeholder inference, and review triage guidance.
+          Probabilities are simulated in the browser — not from a trained model.
+        </p>
       </div>
 
-      <div class="demo-shell">
+      <div class="disclaimer" role="status" aria-live="polite">
+        ⚠️ <strong>Demo disclaimer:</strong> All outputs are deterministic placeholder values for UX review only. No real model is running. Replace with teammate model results when available.
+      </div>
+
+      <div class="demo-layout animate-rise-2">
+
+        <!-- Left panel: input -->
         <div class="demo-panel">
           <h2>Study input</h2>
 
           <div class="field">
             <label for="studySelect">Study ID</label>
-            <select id="studySelect">
+            <select id="studySelect" aria-describedby="study-desc">
               <option value="study_00421">study_00421 — sports injury pathway</option>
               <option value="study_01108">study_01108 — degenerative pattern</option>
               <option value="study_01955">study_01955 — trauma / high-risk flags</option>
             </select>
+            <span id="study-desc" class="sr-only">Select a mock study to load its placeholder report and inference scores.</span>
           </div>
 
-          <p class="muted" style="margin:0 0 0.35rem;font-size:0.8rem;letter-spacing:0.04em;text-transform:uppercase;">
-            Mock MRI series thumbnails
-          </p>
-          <div class="scan-grid" id="scanGrid" aria-hidden="true">
-            <div class="scan-tile is-active" data-label="Sag PD"></div>
-            <div class="scan-tile" data-label="Cor T2"></div>
-            <div class="scan-tile" data-label="Ax PD"></div>
+          <p class="section-label">Mock MRI series thumbnails</p>
+          <div class="scan-grid" id="scanGrid" role="group" aria-label="Mock MRI series">
+            <button class="scan-tile is-active" data-label="Sag PD" aria-pressed="true" aria-label="Sagittal Proton Density series">
+              <div class="scan-glow" aria-hidden="true"></div>
+            </button>
+            <button class="scan-tile" data-label="Cor T2" aria-pressed="false" aria-label="Coronal T2 series">
+              <div class="scan-glow" aria-hidden="true"></div>
+            </button>
+            <button class="scan-tile" data-label="Ax PD" aria-pressed="false" aria-label="Axial Proton Density series">
+              <div class="scan-glow" aria-hidden="true"></div>
+            </button>
           </div>
 
           <div class="field">
-            <label for="reportBox">Training-time report snippet (not available at test)</label>
-            <textarea id="reportBox" readonly></textarea>
+            <label for="reportBox">Training-time report snippet (withheld at inference)</label>
+            <textarea id="reportBox" readonly aria-readonly="true"></textarea>
           </div>
 
-          <button class="btn btn-primary" type="button" id="runInference">Run inference</button>
-          <button class="btn btn-ghost" type="button" id="resetDemo" style="margin-left:0.5rem;">Reset</button>
+          <div style="display:flex; gap:var(--s3); flex-wrap:wrap; align-items:center;">
+            <button class="btn btn-primary" type="button" id="runBtn">
+              Run inference
+            </button>
+            <button class="btn btn-ghost btn-sm" type="button" id="resetBtn">
+              Reset
+            </button>
+          </div>
         </div>
 
+        <!-- Right panel: results -->
         <div class="demo-panel">
           <h2>Predicted findings</h2>
-          <p class="muted" style="margin-top:-0.35rem;margin-bottom:1rem;font-size:0.9rem;">
-            Twelve-label probability panel · updates after Run inference
+          <p class="muted" style="margin-top:-var(--s3); margin-bottom:var(--s5); font-size:var(--fs-sm);">
+            Twelve-label probability panel — updates after Run inference.
           </p>
-          <div class="findings" id="findingsList"></div>
 
-          <div class="action-box" id="actionBox" data-level="low">
+          <div class="findings-list" id="findingsList" role="list" aria-label="Finding probabilities" aria-live="polite"></div>
+
+          <div class="action-panel" id="actionPanel" data-level="none">
             <h3 id="actionTitle">Awaiting inference</h3>
             <p id="actionText">Select a study and run the mock model to generate triage guidance.</p>
           </div>
         </div>
+
       </div>
-    </section>
+
+    </div>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
       <div>
-        <strong style="color:var(--text);">KneeGuard AI</strong> · Demo page<br />
-        Light JavaScript only · no backend · no database
+        <p class="footer-brand">KneeGuard AI</p>
+        <p>Course project mockup for 1501418 Selected Topics in Data Science and AI.<br />
+        Light JavaScript only · no backend · no database.</p>
       </div>
       <div>
-        <a href="index.html">← Back to problem overview</a>
+        <p class="footer-nav-label">Site pages</p>
+        <ul class="footer-links" role="list">
+          <li><a href="index.html">Problem overview</a></li>
+          <li><a href="data.html">Dataset &amp; data model</a></li>
+          <li><a href="model.html">Decision model</a></li>
+          <li><a href="demo.html">Proof-of-concept demo</a></li>
+          <li><a href="about.html">About the team</a></li>
+          <li><a href="references.html">References</a></li>
+        </ul>
       </div>
+      <div>
+        <p class="footer-nav-label">External links</p>
+        <ul class="footer-links" role="list">
+          <li><a href="https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/overview" target="_blank" rel="noopener">Kaggle competition</a></li>
+          <li><a href="https://www.rsna.org/artificial-intelligence/ai-image-challenge/knee-mri-ai-challenge" target="_blank" rel="noopener">RSNA challenge page</a></li>
+          <li><a href="https://github.com/Pnt-CoMExE/kneeguard-ai" target="_blank" rel="noopener">GitHub repository</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 KneeGuard AI project group · Mae Fah Luang University</span>
+      <span>MIT License · Static HTML/CSS/JS</span>
     </div>
   </footer>
 

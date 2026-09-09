@@ -4,298 +4,269 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Decision Model — KneeGuard AI</title>
+  <meta name="description" content="Proposed multilabel decision model, workflow, evaluation plan, decision rules, and ethics for KneeGuard AI." />
+  <meta property="og:title"       content="Decision Model — KneeGuard AI" />
+  <meta property="og:description" content="Part 3: proposed decision model for RSNA knee abnormality detection." />
+  <meta property="og:type"        content="website" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="nav-wrap">
       <a class="brand" href="index.html">
-        <span class="brand-mark" aria-hidden="true">
+        <span class="brand-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M4 14c3-8 6-10 8-10s5 2 8 10"/><circle cx="12" cy="12" r="3"/></svg>
         </span>
         <span class="brand-text">
           KneeGuard AI
-          <small>Selected Topics · DS &amp; AI</small>
+          <span class="brand-sub">Selected Topics · DS &amp; AI</span>
         </span>
       </a>
-      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <ul class="nav-links">
+      <ul class="nav-links" role="list">
         <li><a href="index.html">Problem</a></li>
         <li><a href="data.html">Dataset</a></li>
-        <li><a class="is-active" href="model.html">Model</a></li>
-        <li><a class="nav-cta" href="demo.html">Live Demo</a></li>
+        <li><a href="model.html" class="is-active" aria-current="page">Model</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="demo.html" class="nav-cta">Live Demo</a></li>
       </ul>
     </div>
   </header>
 
-  <main>
-    <div class="page-hero">
-      <p class="eyebrow">Part 3 · Proposed decision model</p>
-      <h1>Decision model design</h1>
-      <p>
-        Multilabel classification with optional multimodal training. Outputs become triage decisions under human oversight.
-        Algorithm details marked <span class="placeholder">PLACEHOLDER</span> await teammate research lock-in.
-      </p>
+  <main id="main-content">
+    <div class="page-container">
+
+      <div class="page-header animate-rise">
+        <p class="eyebrow">Part 3 · Proposed decision model</p>
+        <h1>Decision model design</h1>
+        <p class="lead">
+          Multilabel classification with optional multimodal training. Outputs become triage decisions under human oversight.
+          Details marked <span class="placeholder">PLACEHOLDER</span> await teammate research.
+        </p>
+      </div>
+
+      <!-- Model type -->
+      <section class="section animate-rise-2" aria-labelledby="model-type-heading">
+        <div class="col-2">
+          <div>
+            <div class="section-header">
+              <h2 id="model-type-heading">Selected model type</h2>
+              <p>Why multilabel classification over alternatives.</p>
+            </div>
+            <p class="muted">
+              <strong style="color:var(--text-primary)">Primary:</strong> Multilabel classification model —
+              imaging backbone with study-level aggregation and twelve independent sigmoid heads.<br />
+              <strong style="color:var(--text-primary)">Optional hybrid:</strong> Report NLP / LLM for weak
+              label extraction during training only (not used at inference).
+            </p>
+            <p class="muted">
+              Clustering does not produce calibrated finding probabilities. A single-output regression cannot express
+              the twelve-label clinical structure evaluated by macro-AUC. Multilabel classification aligns directly with the task.
+            </p>
+            <div class="callout">
+              <span class="placeholder">PLACEHOLDER</span> — Final backbone (2.5D CNN, transformer, ensemble)
+              and baseline comparison table from teammate experiments.
+            </div>
+          </div>
+          <div>
+            <div class="section-header"><h2>Candidate approaches</h2></div>
+            <ul class="list-check">
+              <li>Baseline: per-finding mean-prevalence predictor (lower bound)</li>
+              <li>Candidate A: shared encoder + 12 sigmoid output heads</li>
+              <li>Candidate B: sequence-aware 2.5D / video-style backbone</li>
+              <li>Candidate C: multimodal image + text model (train time)</li>
+              <li>Efficiency track: latency / GPU runtime budget constraint</li>
+            </ul>
+            <div style="margin-top:var(--s5); display:flex; flex-wrap:wrap; gap:var(--s2);">
+              <span class="badge badge-brand">Classification</span>
+              <span class="badge badge-brand">Multimodal (train)</span>
+              <span class="badge">Human-in-the-loop</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Model components -->
+      <section class="section" aria-labelledby="components-heading">
+        <div class="section-header">
+          <h2 id="components-heading">Decision model components</h2>
+          <p>Structured description following the course framework.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Component</th><th scope="col">Description</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Model users</strong></td><td>Radiologists, triage coordinators, clinical AI reviewers</td></tr>
+              <tr><td><strong>Input</strong></td><td>Knee MRI DICOM series for one study (no report at inference time)</td></tr>
+              <tr><td><strong>Processing</strong></td><td>Preprocess → encode series → study aggregation → 12 multilabel heads <span class="placeholder">algorithm TBD</span></td></tr>
+              <tr><td><strong>Output</strong></td><td>Twelve probabilities in [0, 1] for clinically important findings</td></tr>
+              <tr><td><strong>Decision</strong></td><td>Triage priority level (Low / Medium / High) and focus findings</td></tr>
+              <tr><td><strong>Action</strong></td><td>Human radiologist reviews, confirms or overrides, and documents finding pathway</td></tr>
+              <tr><td><strong>Feedback</strong></td><td>Log overrides and verified outcomes for periodic recalibration</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Workflow -->
+      <section class="section" aria-labelledby="workflow-heading">
+        <div class="section-header">
+          <h2 id="workflow-heading">Model workflow</h2>
+          <p>Ten-step flow from the course framework, adapted to this case.</p>
+        </div>
+        <div class="workflow">
+          <div class="workflow-step"><div class="step-badge">1</div><div><h3>Data collection</h3><p>Obtain competition MRI studies, metadata, and training reports under license rules.</p></div></div>
+          <div class="workflow-step"><div class="step-badge">2</div><div><h3>Data validation</h3><p>Verify study IDs, series presence, label schema, and report text availability.</p></div></div>
+          <div class="workflow-step"><div class="step-badge">3</div><div><h3>Cleaning &amp; preprocessing</h3><p>Normalise intensities, select informative sequences, and handle missing labels.</p></div></div>
+          <div class="workflow-step"><div class="step-badge">4</div><div><h3>Feature engineering</h3><p>Slice sampling strategy, image embeddings, and optional report-derived weak labels.</p></div></div>
+          <div class="workflow-step"><div class="step-badge">5</div><div><h3>Model training</h3><p>Train multilabel model with group-aware cross-validation folds across sites.</p></div></div>
+          <div class="workflow-step"><div class="step-badge">6</div><div><h3>Validation &amp; testing</h3><p>Macro AUC-ROC, per-finding curves, and runtime checks for the efficiency track.</p></div></div>
+          <div class="workflow-step"><div class="step-badge">7</div><div><h3>Result interpretation</h3><p>Calibrate scores; inspect failure cases with domain expert review.</p></div></div>
+          <div class="workflow-step"><div class="step-badge">8</div><div><h3>Decision recommendation</h3><p>Map probabilities to Low / Medium / High triage priority bands.</p></div></div>
+          <div class="workflow-step"><div class="step-badge">9</div><div><h3>User action</h3><p>Radiologist reviews prioritised findings, confirms or overrides, and finalises the report.</p></div></div>
+          <div class="workflow-step"><div class="step-badge">10</div><div><h3>Feedback &amp; improvement</h3><p>Log disagreements and outcomes; retrain or recalibrate on approved cohorts.</p></div></div>
+        </div>
+      </section>
+
+      <!-- Technical design -->
+      <section class="section" aria-labelledby="technical-heading">
+        <div class="section-header">
+          <h2 id="technical-heading">Technical design (draft)</h2>
+          <p>Confirm values with teammate experiments before submission.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Item</th><th scope="col">Specification</th></tr></thead>
+            <tbody>
+              <tr><td>Input features</td><td>MRI series tensors / embeddings; optional train-time report embeddings</td></tr>
+              <tr><td>Target variables</td><td>12 binary abnormality labels (multilabel)</td></tr>
+              <tr><td>Selected algorithm</td><td><span class="placeholder">PLACEHOLDER</span> — teammate final choice</td></tr>
+              <tr><td>Baseline method</td><td>Prevalence predictor; simple CNN study aggregator</td></tr>
+              <tr><td>Train / val / test strategy</td><td>Competition splits + internal group-aware CV on labelled train</td></tr>
+              <tr><td>Hyperparameters</td><td><span class="placeholder">PLACEHOLDER</span> — learning rate, sampling, loss weights</td></tr>
+              <tr><td>Expected output</td><td><code>submission.csv</code> with study-level probabilities for 12 findings</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Evaluation & Decision rules -->
+      <section class="section" id="decision-rules" aria-labelledby="eval-heading">
+        <div class="col-2">
+          <div>
+            <div class="section-header">
+              <h2 id="eval-heading">Evaluation &amp; success criteria</h2>
+            </div>
+            <ul class="list-check">
+              <li>Primary metric: macro-averaged AUC-ROC across all twelve findings</li>
+              <li>Secondary: per-finding AUC, precision / recall at selected operating points</li>
+              <li>Efficiency track: predictive performance vs GPU runtime (if pursued)</li>
+              <li>Decision-support usefulness rated by clinician partners</li>
+            </ul>
+            <div class="callout">
+              <strong>Draft success criterion:</strong>
+              The model is considered successful if macro AUC-ROC ≥ <span class="placeholder">TBD</span>
+              and at least <span class="placeholder">80%</span> of reviewed triage recommendations
+              are judged clinically useful by test reviewers.
+            </div>
+          </div>
+          <div>
+            <div class="section-header">
+              <h2>Decision rules</h2>
+              <p>Mapping model output to triage priority. Thresholds require clinical agreement.</p>
+            </div>
+            <div class="risk-row">
+              <span class="risk-badge risk-low">Low</span>
+              <div><strong>All critical findings &lt; 0.40</strong></div>
+              <div class="muted">Routine queue — standard reporting workflow</div>
+            </div>
+            <div class="risk-row">
+              <span class="risk-badge risk-medium">Medium</span>
+              <div><strong>Any finding 0.40 – 0.69</strong></div>
+              <div class="muted">Expedited review — notify responsible radiologist</div>
+            </div>
+            <div class="risk-row">
+              <span class="risk-badge risk-high">High</span>
+              <div><strong>Any critical finding ≥ 0.70</strong></div>
+              <div class="muted">Immediate specialist review — document any override</div>
+            </div>
+            <p class="muted" style="margin-top:var(--s3); font-size:var(--fs-xs);">
+              Human confirmation is always required before any patient-facing clinical action.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ethics / benefits / limitations -->
+      <section class="section" style="border-bottom:none;" aria-labelledby="ethics-heading">
+        <div class="section-header">
+          <h2 id="ethics-heading">Benefits, limitations, ethics &amp; risks</h2>
+        </div>
+        <div class="col-3">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Expected benefits</h3>
+            <p>Faster triage, consistent screening across sites, support where MSK specialists are scarce, and structured second-read assistance for complex multilabel exams.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <h3>Limitations</h3>
+            <p>Domain shift across scanners, incomplete labels, class imbalance, and possible over-reliance on report-derived weak supervision that may encode reporting style bias.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <h3>Ethics &amp; risks</h3>
+            <p>False negatives for fracture and ligament injury, fairness across sites and languages, imaging data privacy, limited model explainability, and continuous human oversight requirement.</p>
+          </article>
+        </div>
+
+        <div style="margin-top:var(--s6); text-align:center;">
+          <a class="btn btn-primary" href="demo.html">Open proof-of-concept demo</a>
+        </div>
+      </section>
+
     </div>
-
-    <section class="section">
-      <div class="split">
-        <div class="prose">
-          <div class="section-head">
-            <h2>Selected model type</h2>
-          </div>
-          <p>
-            <strong>Primary:</strong> Multilabel classification model (imaging backbone + study-level aggregation).<br />
-            <strong>Optional hybrid:</strong> Report NLP / LLM for weak label extraction during training only.
-          </p>
-          <p>
-            Why this over alternatives: the competition target is simultaneous detection of twelve findings, evaluated with
-            macro-averaged AUC-ROC. Pure clustering does not produce calibrated finding probabilities; a single regression
-            target cannot express multilabel clinical structure.
-          </p>
-          <p>
-            <span class="placeholder">PLACEHOLDER</span>
-            Final backbone (e.g., 2.5D CNN / transformer / ensemble) and baseline comparison table from teammate experiments.
-          </p>
-        </div>
-        <div>
-          <div class="tag-row">
-            <span class="tag">Classification</span>
-            <span class="tag">Multimodal (train)</span>
-            <span class="tag">Hybrid optional</span>
-            <span class="tag">Human-in-the-loop</span>
-          </div>
-          <ul class="list-check">
-            <li>Baseline: per-finding mean prevalence predictor</li>
-            <li>Candidate: shared encoder + 12 sigmoid heads</li>
-            <li>Candidate: sequence-aware 2.5D / video-style encoder</li>
-            <li>Efficiency track: latency / runtime constraints</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <h2>Decision model components</h2>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Component</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Model users</td>
-              <td>Radiologists, triage coordinators, clinical AI reviewers</td>
-            </tr>
-            <tr>
-              <td>Input</td>
-              <td>Knee MRI DICOM series for a study (no report at test time)</td>
-            </tr>
-            <tr>
-              <td>Processing</td>
-              <td>
-                Preprocess → encode series → aggregate to study embedding → multilabel heads
-                <span class="placeholder">algorithm TBD</span>
-              </td>
-            </tr>
-            <tr>
-              <td>Output</td>
-              <td>Twelve probabilities in [0, 1] for clinically important findings</td>
-            </tr>
-            <tr>
-              <td>Decision</td>
-              <td>Triage priority and suggested review focus by finding risk band</td>
-            </tr>
-            <tr>
-              <td>Action</td>
-              <td>Human review, confirm/override, document follow-up pathway</td>
-            </tr>
-            <tr>
-              <td>Feedback</td>
-              <td>Capture overrides and outcomes for periodic recalibration</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <h2>Model workflow</h2>
-        <p>Ten-step flow from the project guidance, adapted to this case.</p>
-      </div>
-      <div class="flow">
-        <div class="flow-row"><div class="flow-num">1</div><div><h3>Data collection</h3><p>Obtain competition MRI studies, metadata, and training reports under license rules.</p></div></div>
-        <div class="flow-row"><div class="flow-num">2</div><div><h3>Data validation</h3><p>Check study IDs, series presence, label schema, and report availability.</p></div></div>
-        <div class="flow-row"><div class="flow-num">3</div><div><h3>Cleaning &amp; preprocessing</h3><p>Normalize intensities, select informative series, handle missing labels.</p></div></div>
-        <div class="flow-row"><div class="flow-num">4</div><div><h3>Feature engineering</h3><p>Slice sampling, embeddings, optional report-derived weak labels.</p></div></div>
-        <div class="flow-row"><div class="flow-num">5</div><div><h3>Model training</h3><p>Train multilabel model with group-aware validation folds.</p></div></div>
-        <div class="flow-row"><div class="flow-num">6</div><div><h3>Validation &amp; testing</h3><p>Macro AUC-ROC, per-finding curves, runtime checks for efficiency constraints.</p></div></div>
-        <div class="flow-row"><div class="flow-num">7</div><div><h3>Result interpretation</h3><p>Calibrate scores; inspect failure cases with clinician partners.</p></div></div>
-        <div class="flow-row"><div class="flow-num">8</div><div><h3>Decision recommendation</h3><p>Map probabilities to Low / Medium / High triage bands.</p></div></div>
-        <div class="flow-row"><div class="flow-num">9</div><div><h3>User action</h3><p>Radiologist reviews prioritized findings and records the final report.</p></div></div>
-        <div class="flow-row"><div class="flow-num">10</div><div><h3>Feedback &amp; improvement</h3><p>Log disagreements; retrain or recalibrate on approved cohorts.</p></div></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <h2>Technical design (draft)</h2>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Specification</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Input features</td>
-              <td>MRI series tensors / embeddings; optional train-time report embeddings</td>
-            </tr>
-            <tr>
-              <td>Target variables</td>
-              <td>12 binary abnormality labels (multilabel)</td>
-            </tr>
-            <tr>
-              <td>Selected algorithm</td>
-              <td><span class="placeholder">PLACEHOLDER</span> — teammate final choice</td>
-            </tr>
-            <tr>
-              <td>Baseline method</td>
-              <td>Prevalence baseline; simple CNN study aggregator</td>
-            </tr>
-            <tr>
-              <td>Train / val / test</td>
-              <td>Competition splits + internal group-aware CV on train</td>
-            </tr>
-            <tr>
-              <td>Hyperparameters</td>
-              <td><span class="placeholder">PLACEHOLDER</span> learning rate, sampling, loss weights</td>
-            </tr>
-            <tr>
-              <td>Expected output</td>
-              <td><code>submission.csv</code> with study-level probabilities</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="split">
-        <div>
-          <div class="section-head">
-            <h2>Evaluation &amp; success criteria</h2>
-          </div>
-          <ul class="list-check">
-            <li>Primary competition metric: macro-averaged AUC-ROC across findings</li>
-            <li>Secondary: per-finding AUC, precision/recall at operating points</li>
-            <li>Efficiency track: predictive performance vs runtime (if pursued)</li>
-            <li>Decision-support usefulness rated by clinician reviewers</li>
-          </ul>
-          <div class="callout">
-            <strong>Draft success criterion:</strong>
-            The model is considered successful if macro AUC-ROC ≥ <span class="placeholder">TBD</span>
-            and at least <span class="placeholder">80%</span> of reviewed triage recommendations are judged useful by test users.
-          </div>
-        </div>
-        <div>
-          <div class="section-head">
-            <h2>Decision rules</h2>
-            <p>Example mapping from max high-priority finding probability.</p>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Model output</th>
-                  <th>Level</th>
-                  <th>Recommended action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>All priority findings &lt; 0.40</td>
-                  <td>Low</td>
-                  <td>Routine queue; standard reporting workflow</td>
-                </tr>
-                <tr>
-                  <td>Any priority finding 0.40–0.69</td>
-                  <td>Medium</td>
-                  <td>Prioritize review; notify responsible radiologist</td>
-                </tr>
-                <tr>
-                  <td>Any critical finding ≥ 0.70</td>
-                  <td>High</td>
-                  <td>Immediate specialist review; document override</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="muted" style="margin-top:0.75rem;">
-            Thresholds are placeholders and require clinical agreement. Human approval is always required before patient-facing action.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <h2>Benefits, limitations, ethics &amp; risks</h2>
-      </div>
-      <div class="grid-3">
-        <article class="viz-block">
-          <h3>Expected benefits</h3>
-          <p class="caption">
-            Faster triage, more consistent screening across sites, support where MSK specialists are scarce,
-            and structured second-read assistance for complex multilabel exams.
-          </p>
-        </article>
-        <article class="viz-block">
-          <h3>Limitations</h3>
-          <p class="caption">
-            Domain shift across scanners, incomplete labels, class imbalance, and possible over-reliance on
-            report-derived weak supervision that may encode reporting style bias.
-          </p>
-        </article>
-        <article class="viz-block">
-          <h3>Ethics &amp; risks</h3>
-          <p class="caption">
-            False negatives on fracture/ligament injury, fairness across sites/languages, privacy of imaging data,
-            limited explainability, and the need for continuous human oversight.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <h2>Proof of concept</h2>
-        <p>Interactive UI prototype with mock inference — not a production model.</p>
-      </div>
-      <a class="btn btn-primary" href="demo.html">Open the demo interface</a>
-    </section>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
       <div>
-        <strong style="color:var(--text);">KneeGuard AI</strong> · Model page<br />
-        References will use APA 7th edition in the final report.
+        <p class="footer-brand">KneeGuard AI</p>
+        <p>Course project mockup for 1501418 Selected Topics in Data Science and AI.<br />
+        Static site — no backend, no database.</p>
       </div>
       <div>
-        <a href="demo.html">Next: Live demo →</a>
+        <p class="footer-nav-label">Site pages</p>
+        <ul class="footer-links" role="list">
+          <li><a href="index.html">Problem overview</a></li>
+          <li><a href="data.html">Dataset &amp; data model</a></li>
+          <li><a href="model.html">Decision model</a></li>
+          <li><a href="demo.html">Proof-of-concept demo</a></li>
+          <li><a href="about.html">About the team</a></li>
+          <li><a href="references.html">References</a></li>
+        </ul>
       </div>
+      <div>
+        <p class="footer-nav-label">External links</p>
+        <ul class="footer-links" role="list">
+          <li><a href="https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/overview" target="_blank" rel="noopener">Kaggle competition</a></li>
+          <li><a href="https://www.rsna.org/artificial-intelligence/ai-image-challenge/knee-mri-ai-challenge" target="_blank" rel="noopener">RSNA challenge page</a></li>
+          <li><a href="https://github.com/Pnt-CoMExE/kneeguard-ai" target="_blank" rel="noopener">GitHub repository</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 KneeGuard AI project group · Mae Fah Luang University</span>
+      <span>MIT License · Static HTML/CSS/JS</span>
     </div>
   </footer>
 
