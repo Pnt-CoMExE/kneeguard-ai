@@ -268,19 +268,19 @@ main { position: relative; z-index: 1; }
   height: 100%;
   max-width: none;
   object-fit: cover;
-  object-position: 35% center;
-  opacity: .55;
+  object-position: 58% center;
+  opacity: .78;
 }
 
 .hero-scrim {
   position: absolute; inset: 0;
   background:
     linear-gradient(90deg,
-      rgba(6,12,20,.96) 0%,
-      rgba(6,12,20,.88) 38%,
-      rgba(6,12,20,.55) 62%,
-      rgba(6,12,20,.72) 100%),
-    radial-gradient(ellipse 55% 70% at 78% 48%, rgba(0,180,216,.16), transparent 70%);
+      rgba(6,12,20,.94) 0%,
+      rgba(6,12,20,.78) 36%,
+      rgba(6,12,20,.35) 68%,
+      rgba(6,12,20,.18) 100%),
+    linear-gradient(to top, rgba(6,12,20,.55) 0%, transparent 42%);
 }
 
 .hero-scrim::after {
@@ -301,14 +301,13 @@ main { position: relative; z-index: 1; }
   width: 100%; max-width: var(--max-w);
   margin: 0 auto;
   padding: var(--s7) var(--s5);
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  align-items: center;
   animation: rise-in .7s ease both;
 }
 
-.hero-copy { min-width: 0; }
+.hero-copy {
+  min-width: 0;
+  max-width: 40rem;
+}
 
 .hero h1 {
   font-size: var(--fs-hero);
@@ -326,46 +325,25 @@ main { position: relative; z-index: 1; }
 
 .cta-row { display: flex; flex-wrap: wrap; gap: var(--s3); }
 
-.hero-illustration {
-  position: relative;
-  width: min(100%, 460px);
-  margin-left: auto;
-  filter: drop-shadow(0 22px 50px rgba(0,0,0,.5));
-  animation: rise-in .85s .12s ease both;
-}
-
-.hero-overlay {
-  width: 100%;
-  height: auto;
-  max-width: none;
-  opacity: 1;
-}
-
 @media (max-width: 900px) {
   .hero {
     min-height: auto;
     align-items: stretch;
   }
   .hero-content {
-    grid-template-columns: 1fr;
     padding-top: var(--s6);
     padding-bottom: var(--s6);
   }
-  .hero-illustration {
-    order: -1;
-    width: min(78%, 340px);
-    margin: 0 auto;
-  }
   .hero-photo {
     object-position: center 30%;
-    opacity: .35;
+    opacity: .42;
   }
   .hero-scrim {
     background:
       linear-gradient(180deg,
-        rgba(6,12,20,.7) 0%,
-        rgba(6,12,20,.92) 45%,
-        rgba(6,12,20,.98) 100%);
+        rgba(6,12,20,.55) 0%,
+        rgba(6,12,20,.82) 45%,
+        rgba(6,12,20,.96) 100%);
   }
 }
 
