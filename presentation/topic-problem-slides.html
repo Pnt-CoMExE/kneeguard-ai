@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KneeGuard AI — Topic &amp; Problem Statement</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap");
+
+    :root {
+      --bg: #060c14;
+      --panel: #0e1a28;
+      --text: #edf4f8;
+      --muted: #8fb0c4;
+      --brand: #00b4d8;
+      --line: rgba(0, 180, 216, 0.2);
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; height: 100%;
+      background: var(--bg); color: var(--text);
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+
+    .deck { height: 100%; position: relative; overflow: hidden; }
+    .slide {
+      display: none;
+      height: 100%;
+      padding: 48px 64px 72px;
+      background:
+        radial-gradient(900px 500px at 85% 0%, rgba(0,180,216,.12), transparent 55%),
+        radial-gradient(700px 400px at 10% 100%, rgba(0,100,160,.1), transparent 50%),
+        var(--bg);
+    }
+    .slide.active { display: flex; flex-direction: column; }
+    .slide h1, .slide h2 {
+      font-family: "Sora", sans-serif;
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+      line-height: 1.15;
+    }
+    .slide h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); }
+    .slide h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); }
+    .eyebrow {
+      color: var(--brand); font-size: 0.85rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .lead { color: var(--muted); font-size: 1.2rem; max-width: 48rem; line-height: 1.55; }
+    ul { margin: 8px 0 0; padding-left: 1.2rem; font-size: 1.15rem; line-height: 1.55; }
+    li { margin-bottom: 10px; color: var(--text); }
+    li span { color: var(--muted); }
+    .callout {
+      margin-top: 22px; padding: 18px 20px;
+      border-left: 4px solid var(--brand);
+      background: rgba(0,180,216,.1);
+      border-radius: 0 12px 12px 0;
+      font-size: 1.15rem; line-height: 1.5;
+      max-width: 52rem;
+    }
+    .meta { color: var(--muted); font-size: 1.05rem; margin-top: 10px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 18px; }
+    .card {
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 14px; padding: 18px 20px;
+    }
+    .card h3 { margin: 0 0 10px; font-family: "Sora", sans-serif; font-size: 1.1rem; color: var(--brand); }
+    table {
+      width: 100%; border-collapse: collapse; margin-top: 12px;
+      font-size: 1.02rem;
+    }
+    th, td {
+      text-align: left; padding: 12px 14px;
+      border-bottom: 1px solid var(--line); vertical-align: top;
+    }
+    th { color: var(--brand); font-size: 0.85rem; letter-spacing: .06em; text-transform: uppercase; }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px;
+    }
+    .member {
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 12px; padding: 14px;
+    }
+    .member .name { font-weight: 700; font-size: 0.98rem; margin-bottom: 4px; }
+    .member .id { color: var(--brand); font-size: 0.82rem; margin-bottom: 6px; }
+    .member .role { color: var(--muted); font-size: 0.9rem; }
+    .footer-bar {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 24px; background: rgba(6,12,20,.85);
+      border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--muted);
+      z-index: 10;
+    }
+    .progress {
+      height: 3px; background: rgba(255,255,255,.08);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 11;
+    }
+    .progress > span {
+      display: block; height: 100%; background: var(--brand);
+      transition: width .25s ease;
+    }
+    .hint { opacity: .8; }
+    @media (max-width: 980px) {
+      .slide { padding: 28px 22px 70px; }
+      .grid-2, .team-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .grid-2, .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress"><span id="bar"></span></div>
+  <div class="deck" id="deck">
+
+    <!-- 1 -->
+    <section class="slide active">
+      <div class="eyebrow">1501418 · Selected Topics in Data Science and AI</div>
+      <h1>KneeGuard AI</h1>
+      <p class="lead">Multimodal Knee Abnormality Detection from MRI</p>
+      <p class="meta">Final Project — Topic &amp; Problem Statement (Week presentation)</p>
+      <p class="meta">Domain: Healthcare · Dataset: RSNA Knee Abnormality Detection (Kaggle)</p>
+      <div class="callout">
+        Focus today: <strong>Topic selection</strong> and <strong>problem statement</strong> only.
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide">
+      <div class="eyebrow">Team</div>
+      <h2>Group members &amp; responsibilities</h2>
+      <div class="team-grid">
+        <div class="member"><div class="name">Patcharapon Teerarassamee</div><div class="id">6631501083</div><div class="role">Data processing</div></div>
+        <div class="member"><div class="name">Lalitphat Bunkerd</div><div class="id">6631501104</div><div class="role">Data processing</div></div>
+        <div class="member"><div class="name">Patiphan Nigrotha</div><div class="id">6631501070</div><div class="role">Modelling / Research</div></div>
+        <div class="member"><div class="name">Prathanakorn Piti</div><div class="id">6631501073</div><div class="role">Modelling</div></div>
+        <div class="member"><div class="name">Tanapon Saodan</div><div class="id">6631501044</div><div class="role">Modelling</div></div>
+        <div class="member"><div class="name">Paniti Konngoen</div><div class="id">6631501071</div><div class="role">Web mockup</div></div>
+        <div class="member"><div class="name">Pisit Nilthongkam</div><div class="id">6631501085</div><div class="role">Network + Document</div></div>
+        <div class="member"><div class="name">Worayut Krichsan</div><div class="id">6631501105</div><div class="role">Report</div></div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide">
+      <div class="eyebrow">Topic</div>
+      <h2>What we will build</h2>
+      <p class="lead">
+        An AI decision-support system that estimates probabilities for
+        <strong>12 clinically important knee abnormalities</strong> from MRI studies,
+        then helps radiologists prioritize review (triage).
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Application area</h3>
+          <ul>
+            <li>Healthcare / medical imaging AI</li>
+            <li>Musculoskeletal (MSK) radiology</li>
+            <li>Multilabel classification + decision support</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Course framework</h3>
+          <ul>
+            <li><strong>Problem</strong> → Dataset → Data Model</li>
+            <li>AI Model → Decision → Action</li>
+            <li>Today we present only the Problem stage</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide">
+      <div class="eyebrow">Problem context</div>
+      <h2>What is happening?</h2>
+      <ul>
+        <li>A single knee MRI can reveal <strong>multiple abnormalities at once</strong> (ligaments, meniscus, OA, effusion, fracture, and more).</li>
+        <li>Interpretation quality varies across sites and readers.</li>
+        <li>Access to specialty-trained MSK radiologists is limited in many healthcare settings.</li>
+        <li>High-risk findings (e.g., fracture, ACL injury) may be delayed in a large reading queue.</li>
+      </ul>
+      <div class="callout">
+        Current limitation: the process depends heavily on expert reading, which is hard to scale consistently.
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide">
+      <div class="eyebrow">Decision problem</div>
+      <h2>Problem statement</h2>
+      <div class="callout">
+        <strong>The proposed model will help radiologists and triage teams classify clinically important knee abnormalities by using multimodal knee MRI series and (training-time) radiology report text.</strong>
+      </div>
+      <div class="grid-2" style="margin-top:24px;">
+        <div class="card">
+          <h3>Decision needed</h3>
+          <ul>
+            <li>Which studies should be reviewed first?</li>
+            <li>Which findings need urgent attention?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>How AI helps</h3>
+          <ul>
+            <li>Outputs 12 finding probabilities</li>
+            <li>Maps scores to Low / Medium / High triage</li>
+            <li>Human confirmation remains required</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide">
+      <div class="eyebrow">Stakeholders</div>
+      <h2>Who is involved?</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Stakeholder</th>
+            <th>Role</th>
+            <th>Information / decision needed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MSK radiologist</td>
+            <td>Decision maker</td>
+            <td>Prioritized worklist + per-finding probabilities</td>
+          </tr>
+          <tr>
+            <td>ER / orthopaedic clinician</td>
+            <td>Care provider</td>
+            <td>High-risk flags (fracture, ligament injury)</td>
+          </tr>
+          <tr>
+            <td>Hospital / imaging IT</td>
+            <td>System operator</td>
+            <td>Runtime, audit trail, safe deployment constraints</td>
+          </tr>
+          <tr>
+            <td>Patient</td>
+            <td>Affected party</td>
+            <td>Faster and more consistent care pathway</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide">
+      <div class="eyebrow">Justification</div>
+      <h2>Why this problem is worth solving</h2>
+      <ul>
+        <li><strong>Clinical complexity:</strong> multilabel findings in one exam require simultaneous detection.</li>
+        <li><strong>Workforce gap:</strong> MSK specialist expertise is unevenly distributed.</li>
+        <li><strong>Patient impact:</strong> delayed high-risk findings can affect treatment timing.</li>
+        <li><strong>Feasible dataset:</strong> RSNA/Kaggle public competition data (~5,000+ exams, multi-site, multilingual reports).</li>
+        <li><strong>Clear decision use-case:</strong> triage support with human-in-the-loop oversight.</li>
+      </ul>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide">
+      <div class="eyebrow">Direction</div>
+      <h2>Objectives &amp; project questions</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Objectives</h3>
+          <ul>
+            <li>Examine relationships between MRI studies and 12 abnormality labels</li>
+            <li>Develop a multilabel model for per-finding probabilities</li>
+            <li>Translate outputs into triage decision rules with human oversight</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Key questions</h3>
+          <ul>
+            <li>Which features matter most for each finding?</li>
+            <li>Which model best supports multilabel detection?</li>
+            <li>How do we convert probabilities into practical actions?</li>
+            <li>How should success be evaluated?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide">
+      <div class="eyebrow">Closing</div>
+      <h2>Summary for this week</h2>
+      <ul>
+        <li><strong>Topic:</strong> KneeGuard AI — multimodal knee abnormality detection from MRI</li>
+        <li><strong>Problem:</strong> inconsistent / delayed MSK MRI interpretation under limited specialist access</li>
+        <li><strong>Decision:</strong> classify and prioritize clinically important findings for radiologist review</li>
+        <li><strong>Next steps:</strong> dataset description, data model, and proposed decision model</li>
+      </ul>
+      <div class="callout">
+        Mockup site: <strong>https://pnt-comexe.github.io/kneeguard-ai/</strong>
+      </div>
+      <p class="meta" style="margin-top:24px;">Thank you — Questions welcome.</p>
+    </section>
+
+  </div>
+
+  <div class="footer-bar">
+    <span>KneeGuard AI · Topic &amp; Problem Statement</span>
+    <span class="hint">← → or Space to navigate · F for fullscreen</span>
+    <span id="counter">1 / 9</span>
+  </div>
+
+  <script>
+    (function () {
+      var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+      var i = 0;
+      var bar = document.getElementById("bar");
+      var counter = document.getElementById("counter");
+
+      function show(n) {
+        i = Math.max(0, Math.min(slides.length - 1, n));
+        slides.forEach(function (s, idx) { s.classList.toggle("active", idx === i); });
+        counter.textContent = (i + 1) + " / " + slides.length;
+        bar.style.width = ((i + 1) / slides.length * 100) + "%";
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+          e.preventDefault(); show(i + 1);
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault(); show(i - 1);
+        } else if (e.key === "Home") {
+          show(0);
+        } else if (e.key === "End") {
+          show(slides.length - 1);
+        } else if (e.key === "f" || e.key === "F") {
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+          else document.exitFullscreen();
+        }
+      });
+
+      show(0);
+    })();
+  </script>
+</body>
+</html>

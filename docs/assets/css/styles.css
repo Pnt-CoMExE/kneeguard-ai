@@ -511,7 +511,7 @@ tbody tr:hover { background: rgba(255,255,255,.02); }
   border: 2px solid var(--brand-line);
   margin: 0 auto var(--s3);
   display: grid; place-items: center;
-  font-family: var(--font-head); font-size: var(--fs-xl); font-weight: 700; color: var(--brand);
+  font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; color: var(--brand);
 }
 .team-card h3 { font-size: var(--fs-md); margin-bottom: var(--s1); }
 .team-card .role { font-size: var(--fs-xs); color: var(--brand); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: var(--s3); }
