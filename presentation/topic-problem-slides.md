@@ -128,5 +128,11 @@ Copy sections from this Markdown into PowerPoint / Google Slides.
 ## Live on GitHub Pages
 https://pnt-comexe.github.io/kneeguard-ai/presentation/topic-problem-slides.html
 
-Open `topic-problem-slides.html` in a browser → press `F` for fullscreen → use `←` `→` / Space.
+### Present on laptop
+Open `topic-problem-slides.html` in a browser → tap/click the cyan **Present** button (top-right) or press `F` → use `←` `→` / Space.
+
+### Present on iPad (Safari)
+1. Open the live URL above in Safari (landscape recommended).
+2. Tap the cyan **Present** button at the **top-right** for immersive / fullscreen mode.
+3. Navigate with **swipe left/right** or the large **‹ ›** buttons.
 
