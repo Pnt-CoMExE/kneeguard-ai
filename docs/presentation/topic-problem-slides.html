@@ -172,20 +172,33 @@
 
     .fs-btn {
       appearance: none;
-      border: 1px solid var(--line);
-      background: rgba(14, 26, 40, 0.9);
-      color: var(--text);
-      border-radius: 10px;
-      padding: 8px 12px;
+      position: fixed;
+      top: calc(14px + var(--safe-top));
+      right: calc(14px + var(--safe-right));
+      z-index: 30;
+      border: 2px solid #7de7ff;
+      background: var(--brand);
+      color: #041018;
+      border-radius: 12px;
+      padding: 12px 18px;
+      min-height: 48px;
+      min-width: 112px;
       font: inherit;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
       white-space: nowrap;
+      box-shadow: 0 6px 20px rgba(0, 180, 216, 0.35);
     }
-    .fs-btn:active { background: rgba(0, 180, 216, 0.25); }
+    .fs-btn:active { filter: brightness(1.08); }
+    html.is-presenting .fs-btn {
+      background: #102433;
+      color: var(--text);
+      border-color: var(--brand);
+    }
 
     /* Immersive / fullscreen presentation mode (works on iPad Safari) */
     html.is-presenting body { cursor: none; }
@@ -196,7 +209,6 @@
       border-top: none;
       pointer-events: none;
     }
-    html.is-presenting .footer-center,
     html.is-presenting .footer-right {
       pointer-events: auto;
     }
@@ -439,12 +451,11 @@
   <button type="button" class="nav-btn prev" id="prevBtn" aria-label="Previous slide">‹</button>
   <button type="button" class="nav-btn next" id="nextBtn" aria-label="Next slide">›</button>
 
+  <button type="button" class="fs-btn" id="fsBtn" aria-pressed="false">Present</button>
+
   <div class="footer-bar">
     <span class="footer-left"><a href="../index.html">← KneeGuard AI site</a> · Topic &amp; Problem Statement</span>
-    <span class="footer-center">
-      <button type="button" class="fs-btn" id="fsBtn" aria-pressed="false">Present</button>
-      <span class="hint"> · Swipe or tap ‹ › · Present for fullscreen</span>
-    </span>
+    <span class="footer-center hint">Swipe or tap ‹ ›</span>
     <span class="footer-right" id="counter">1 / 9</span>
   </div>
 
