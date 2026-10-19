@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contributing sites — KneeGuard AI</title>
+  <meta name="description" content="Map of the 19 Kaggle data-contributing institutions plus 3 additional sites from the RSNA 2026 Acknowledgements." />
+  <meta property="og:title" content="Contributing sites — KneeGuard AI" />
+  <meta property="og:description" content="22 hospitals in 18 countries that contributed knee MRI studies to the RSNA challenge." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/map.css" />
+  <link rel="stylesheet" href="vendor/leaflet.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html" aria-label="KneeGuard AI home">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 14c3-8 6-10 8-10s5 2 8 10"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        <span class="brand-text">
+          KneeGuard AI
+          <span class="brand-sub">Selected Topics · DS &amp; AI</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Problem</a></li>
+        <li><a href="data.html">Dataset</a></li>
+        <li><a href="map.html" class="is-active" aria-current="page">Sites</a></li>
+        <li><a href="model.html">Model</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="presentation/topic-problem-slides.html">Slides</a></li>
+        <li><a href="demo.html" class="nav-cta">Live Demo</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="page-container">
+      <section class="section" id="sites-map" aria-labelledby="sites-map-heading" style="border-bottom: none;">
+        <div class="page-header" style="border-bottom: none; margin-bottom: var(--s5); padding-bottom: 0;">
+          <p class="eyebrow">Kaggle Acknowledgements · 19 institutions + 3 additional sites</p>
+          <h1 id="sites-map-heading">Contributing sites</h1>
+          <p class="lead">
+            Kaggle names 19 data-contributing institutions and 3 additional sites — 22 hospitals in 18 countries.
+            Click a pin for diet, terrain/work, and sport context.
+            This is not a prevalence map and not a count of DICOM files.
+          </p>
+          <p class="muted" style="margin-top: var(--s3); font-size: var(--fs-sm);">
+            Atlas content adapted from the group map page and kept inside the KneeGuard site.
+          </p>
+        </div>
+        <div class="atlas">
+          <div class="atlas-map">
+            <div id="world-map" role="application" aria-label="World map of 22 named Kaggle contributing sites"></div>
+            <div id="pin-hover" class="pin-hover" hidden></div>
+            <div class="atlas-legend">Hover a pin for the hospital · GBD 2021 is the country rate · not a political border</div>
+          </div>
+          <aside class="atlas-panel">
+            <div class="atlas-toolbar" id="map-lenses"></div>
+            <div class="atlas-tabs" role="tablist">
+              <button class="atlas-tab is-on" data-tab="country" type="button" title="Diet, terrain, sport, and findings for the selected country">Country</button>
+              <button class="atlas-tab" data-tab="findings" type="button" title="The 12 Kaggle knee labels and the load that produces them">12 findings</button>
+              <button class="atlas-tab" data-tab="sources" type="button" title="Papers and pages used for this map, not a DICOM census">Sources</button>
+            </div>
+            <div class="atlas-body" id="map-panel"></div>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">KneeGuard AI</p>
+        <p>Course project mockup for 1501418 Selected Topics in Data Science and AI.<br />
+        Static site — no backend, no database.</p>
+      </div>
+      <div>
+        <p class="footer-nav-label">Site pages</p>
+        <ul class="footer-links" role="list">
+          <li><a href="index.html">Problem overview</a></li>
+          <li><a href="data.html">Dataset &amp; data model</a></li>
+          <li><a href="map.html">Contributing sites</a></li>
+          <li><a href="model.html">Decision model</a></li>
+          <li><a href="demo.html">Proof-of-concept demo</a></li>
+          <li><a href="about.html">About the team</a></li>
+          <li><a href="presentation/topic-problem-slides.html">Topic &amp; problem slides</a></li>
+          <li><a href="references.html">References</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-nav-label">External links</p>
+        <ul class="footer-links" role="list">
+          <li><a href="https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/overview" target="_blank" rel="noopener">Kaggle competition</a></li>
+          <li><a href="https://www.rsna.org/artificial-intelligence/ai-image-challenge/knee-mri-ai-challenge" target="_blank" rel="noopener">RSNA challenge page</a></li>
+          <li><a href="https://github.com/Pnt-CoMExE/kneeguard-ai" target="_blank" rel="noopener">GitHub repository</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 KneeGuard AI project group · Mae Fah Luang University</span>
+      <span>MIT License · Static HTML/CSS/JS</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="vendor/leaflet.js"></script>
+  <script src="assets/js/world-map.js"></script>
+</body>
+</html>
