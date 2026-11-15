@@ -72,8 +72,8 @@
               <div class="stat-label">Abnormality targets</div>
             </div>
             <div class="stat-item">
-              <div class="stat-num">5 k+</div>
-              <div class="stat-label">MRI exams (train)</div>
+              <div class="stat-num">4.4k</div>
+              <div class="stat-label">Training studies</div>
             </div>
             <div class="stat-item">
               <div class="stat-num">19</div>
@@ -98,7 +98,7 @@
       <section class="section" aria-labelledby="pipeline-heading">
         <div class="section-header">
           <h2 id="pipeline-heading">End-to-end decision chain</h2>
-          <p>Project framework aligned with the course guideline: Problem → Dataset → Data Model → AI Model → Decision.</p>
+          <p>Project framework aligned with the course guideline: Problem → Dataset → Data Model → AI Model → Decision → Recovery.</p>
         </div>
         <nav class="pipeline" aria-label="Project pipeline">
           <a class="pipeline-step" href="index.html">
@@ -120,6 +120,10 @@
           <a class="pipeline-step" href="model.html#decision-rules">
             <span class="step-num">05</span>
             <span class="step-label">Decision</span>
+          </a>
+          <a class="pipeline-step" href="rehab.html">
+            <span class="step-num">06</span>
+            <span class="step-label">Recovery</span>
           </a>
         </nav>
       </section>
@@ -248,20 +252,34 @@
           <h2 id="sitemap-heading">Explore the project</h2>
           <p>Content mirrors the course report structure.</p>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <a class="card card-link" href="data.html">
             <div class="card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
             </div>
             <h3>Dataset &amp; data model</h3>
-            <p>Dataset card, dictionary, quality plan, EDA mocks, and pipeline diagram.</p>
+            <p>Dataset card, label source, series planes, and the pipeline diagram.</p>
+          </a>
+          <a class="card card-link" href="map.html">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.8 3.8 5.8 3.8 9s-1.3 6.2-3.8 9c-2.5-2.8-3.8-5.8-3.8-9s1.3-6.2 3.8-9z"/></svg>
+            </div>
+            <h3>Contributing sites</h3>
+            <p>22 named hospitals in 18 countries, with diet, terrain, and sport context.</p>
           </a>
           <a class="card card-link" href="model.html">
             <div class="card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
             </div>
             <h3>Decision model</h3>
-            <p>Architecture, workflow, evaluation plan, decision rules, and ethics discussion.</p>
+            <p>Shared encoder, twelve heads, triage bands, and what happens when a score disagrees with the report.</p>
+          </a>
+          <a class="card card-link" href="rehab.html">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 14c3-8 6-10 8-10s5 2 8 10"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Recovery plans</h3>
+            <p>Five case plans. The exercises follow the written report when a model score is uncertain.</p>
           </a>
         </div>
       </section>

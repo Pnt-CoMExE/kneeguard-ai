@@ -64,7 +64,7 @@
               <tr><td>Dataset name</td><td>RSNA Knee Abnormality Detection</td></tr>
               <tr><td>Dataset provider / owner</td><td>Radiological Society of North America (RSNA) via Kaggle</td></tr>
               <tr><td>Source / URL</td><td><a href="https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/data" target="_blank" rel="noopener">kaggle.com/competitions/rsna-knee-abnormality-detection/data</a></td></tr>
-              <tr><td>Number of records</td><td>~5,000+ MRI exams (train); ~1,300 studies in test set</td></tr>
+              <tr><td>Number of records</td><td>4,407 training studies and 24,371 series. About 1,300 studies in the hidden test set. 58 training studies have complete expert labels; 4,349 have the radiology report only.</td></tr>
               <tr><td>Number of attributes / targets</td><td>12 binary labels + DICOM series + radiology report text (train only)</td></tr>
               <tr><td>Data format</td><td>DICOM series per study; CSV metadata; plain-text radiology reports</td></tr>
               <tr><td>Target variable(s)</td><td>Per-study probability for each of 12 knee findings</td></tr>
@@ -192,6 +192,70 @@
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section class="section" aria-labelledby="eda-heading">
+        <div class="section-header">
+          <h2 id="eda-heading">Three views of the training files</h2>
+          <p>
+            The public file inventory does not publish how often each of the 12 findings occurs, or how many findings sit in one study.
+            These charts use the counts that are published: where labels come from, how series are split by plane, and how many named hospitals each country contributes.
+          </p>
+        </div>
+        <div class="col-3">
+          <article class="card" aria-labelledby="chart1-title">
+            <h3 id="chart1-title">Fig 1 — Where the 12 labels come from</h3>
+            <p class="muted" style="font-size:var(--fs-xs); margin-bottom:var(--s4);">
+              Share of the 4,407 training studies.
+            </p>
+            <div class="chart-wrap">
+              <div class="bar-chart-row"><span class="bar-chart-label">Report only</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:98.7%"></div></div><span class="bar-chart-val">4,349</span></div>
+              <div class="bar-chart-row"><span class="bar-chart-label">Expert labels</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:1.3%"></div></div><span class="bar-chart-val">58</span></div>
+            </div>
+            <p class="muted" style="margin-top:var(--s4); font-size:var(--fs-xs);">
+              <strong style="color:var(--text-primary)">Interpretation:</strong>
+              Complete expert labels cover 1.3% of training studies. The other 98.7% can supervise the 12 findings only through the radiology report, so report reading is part of the model, not a side task.
+            </p>
+          </article>
+          <article class="card" aria-labelledby="chart2-title">
+            <h3 id="chart2-title">Fig 2 — Training series by plane</h3>
+            <p class="muted" style="font-size:var(--fs-xs); margin-bottom:var(--s4);">
+              24,371 series. Every training study includes sagittal, coronal, and axial images.
+            </p>
+            <div class="chart-wrap">
+              <div class="bar-chart-row"><span class="bar-chart-label">Sagittal</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:100%"></div></div><span class="bar-chart-val">9,864</span></div>
+              <div class="bar-chart-row"><span class="bar-chart-label">Coronal</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:87%"></div></div><span class="bar-chart-val">8,609</span></div>
+              <div class="bar-chart-row"><span class="bar-chart-label">Axial</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:60%"></div></div><span class="bar-chart-val">5,898</span></div>
+            </div>
+            <p class="muted" style="margin-top:var(--s4); font-size:var(--fs-xs);">
+              <strong style="color:var(--text-primary)">Interpretation:</strong>
+              A study-level model has to combine three planes. Sagittal series are the largest share, so a sagittal-only encoder would drop the coronal and axial evidence.
+            </p>
+          </article>
+          <article class="card" aria-labelledby="chart3-title">
+            <h3 id="chart3-title">Fig 3 — Named hospitals by country</h3>
+            <p class="muted" style="font-size:var(--fs-xs); margin-bottom:var(--s4);">
+              22 institutions on the Sites map. This is not a count of MRI exams.
+            </p>
+            <div class="chart-wrap">
+              <div class="bar-chart-row"><span class="bar-chart-label">Türkiye</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:100%"></div></div><span class="bar-chart-val">3</span></div>
+              <div class="bar-chart-row"><span class="bar-chart-label">Canada</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:67%"></div></div><span class="bar-chart-val">2</span></div>
+              <div class="bar-chart-row"><span class="bar-chart-label">Thailand</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:67%"></div></div><span class="bar-chart-val">2</span></div>
+              <div class="bar-chart-row"><span class="bar-chart-label">15 countries</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:33%"></div></div><span class="bar-chart-val">1 each</span></div>
+            </div>
+            <p class="muted" style="margin-top:var(--s4); font-size:var(--fs-xs);">
+              <strong style="color:var(--text-primary)">Interpretation:</strong>
+              Most countries contribute one named hospital. The files do not say how many exams each hospital sent, so a single site can still dominate training volume. Validation splits should stay grouped by site.
+            </p>
+          </article>
+        </div>
+        <p class="muted" style="margin-top:var(--s4); font-size:var(--fs-xs);">
+          Study and series counts are the public training-file inventory of the
+          <a href="https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/data" target="_blank" rel="noopener">Kaggle dataset</a>
+          (4,407 studies; sagittal 9,864, coronal 8,609, axial 5,898), as summarized by
+          <a href="https://hounsfieldlab.com/datasets/rsna-knee-abnormality-detection-2026.html" target="_blank" rel="noopener">Hounsfield Lab</a>
+          (checked 11 November 2026). Hospital counts are the named sites on this website’s map.
+        </p>
       </section>
 
       <!-- Data model / pipeline -->

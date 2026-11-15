@@ -321,6 +321,7 @@
         "<h2>" + esc(item.chip) + "</h2>" +
         '<p class="rehab-id">Study ID ending in ' + esc(item.tail) + "</p>" +
         '<div class="rehab-scores">' + scores + "</div>" +
+        '<p class="rehab-bridge"><a href="model.html#decision-rules">How these scores become a triage decision</a>. When a score and the report disagree, this exercise set follows the written report.</p>' +
         "<ul>" + notes + "</ul>" +
         "<h3>What the report notes</h3>" +
         '<ul class="rehab-report">' + report + "</ul>" +

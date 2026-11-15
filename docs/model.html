@@ -63,15 +63,22 @@
               label extraction during training only (not used at inference).
             </p>
             <p class="muted">
+              <strong style="color:var(--text-primary)">Selected design:</strong>
+              A shared ResNet-50 encoder reads sampled slices from the sagittal, coronal, and axial series.
+              Slice embeddings are averaged into one study vector, then twelve independent sigmoid heads each output a probability.
+              The radiology report is used only while training, because 4,349 of 4,407 training studies have no complete expert labels and the test studies have no report.
+            </p>
+            <p class="muted">
               Clustering does not produce calibrated finding probabilities. A single-output regression cannot express
               the twelve-label clinical structure evaluated by macro-AUC. Multilabel classification aligns directly with the task.
+              This is the planned design. This site does not include a finished training run.
             </p>
           </div>
           <div>
             <div class="section-header"><h2>Candidate approaches</h2></div>
             <ul class="list-check">
               <li>Baseline: per-finding mean-prevalence predictor (lower bound)</li>
-              <li>Candidate A: shared encoder + 12 sigmoid output heads</li>
+              <li>Candidate A (selected): shared ResNet-50 encoder, study-level pooling, and 12 sigmoid heads</li>
               <li>Candidate B: sequence-aware 2.5D / video-style backbone</li>
               <li>Candidate C: multimodal image + text model (train time)</li>
               <li>Efficiency track: latency / GPU runtime budget constraint</li>
@@ -97,10 +104,10 @@
             <tbody>
               <tr><td><strong>Model users</strong></td><td>Radiologists, triage coordinators, clinical AI reviewers</td></tr>
               <tr><td><strong>Input</strong></td><td>Knee MRI DICOM series for one study (no report at inference time)</td></tr>
-              <tr><td><strong>Processing</strong></td><td>Preprocess → encode series → study aggregation → 12 multilabel heads</td></tr>
+              <tr><td><strong>Processing</strong></td><td>ResNet-50 encodes sampled slices from three planes, mean-pools them to one study vector, then twelve sigmoid heads score the findings. Report text is used only to build training labels.</td></tr>
               <tr><td><strong>Output</strong></td><td>Twelve probabilities in [0, 1] for clinically important findings</td></tr>
               <tr><td><strong>Decision</strong></td><td>Triage priority level (Low / Medium / High) and focus findings</td></tr>
-              <tr><td><strong>Action</strong></td><td>Human radiologist reviews, confirms or overrides, and documents finding pathway</td></tr>
+              <tr><td><strong>Action</strong></td><td>The radiologist confirms or overrides the report. A recovery plan, when one is offered, follows that confirmed report. <a href="rehab.html">Open the five example plans</a>.</td></tr>
               <tr><td><strong>Feedback</strong></td><td>Log overrides and verified outcomes for periodic recalibration</td></tr>
             </tbody>
           </table>
@@ -139,7 +146,8 @@
             <tbody>
               <tr><td>Input features</td><td>MRI series tensors / embeddings; optional train-time report embeddings</td></tr>
               <tr><td>Target variables</td><td>12 binary abnormality labels (multilabel)</td></tr>
-              <tr><td>Baseline method</td><td>Prevalence predictor; simple CNN study aggregator</td></tr>
+              <tr><td>Selected algorithm</td><td>Shared ResNet-50 encoder, study-level mean pooling, 12 sigmoid heads. Report text supervises training only.</td></tr>
+              <tr><td>Baseline method</td><td>Per-finding prevalence predictor. The selected design is useful only if its macro AUC is higher than this baseline.</td></tr>
               <tr><td>Train / val / test strategy</td><td>Competition splits + internal group-aware CV on labelled train</td></tr>
               <tr><td>Expected output</td><td><code>submission.csv</code> with study-level probabilities for 12 findings</td></tr>
             </tbody>
@@ -155,7 +163,7 @@
               <h2 id="eval-heading">Evaluation &amp; success criteria</h2>
             </div>
             <ul class="list-check">
-              <li>Primary metric: macro-averaged AUC-ROC across all twelve findings</li>
+              <li>Primary metric: macro-averaged AUC-ROC across all twelve findings. Success means beating the prevalence baseline on that metric.</li>
               <li>Secondary: per-finding AUC, precision / recall at selected operating points</li>
               <li>Efficiency track: predictive performance vs GPU runtime (if pursued)</li>
               <li>Decision-support usefulness rated by clinician partners</li>
@@ -182,9 +190,17 @@
               <div class="muted">Immediate specialist review — document any override</div>
             </div>
             <p class="muted" style="margin-top:var(--s3); font-size:var(--fs-xs);">
+              A critical finding at or above 0.70 goes to immediate specialist review.
+              If every critical finding stays under 0.40, the study stays in the routine queue.
               Human confirmation is always required before any patient-facing clinical action.
             </p>
           </div>
+        </div>
+        <div class="callout" style="margin-top:var(--s5);">
+          <strong>When a score and the report disagree:</strong>
+          the five recovery examples follow the written report, not the uncertain score.
+          An ACL score near 0.50 does not cancel a report that says the ligament is torn.
+          <a href="rehab.html">See the five cases</a>.
         </div>
       </section>
 
