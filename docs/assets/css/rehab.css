@@ -1,0 +1,207 @@
+/* Recovery plans — page layout scoped so it does not restyle shared cards. */
+
+.rehab-page .page-header {
+  border-bottom: none;
+  margin-bottom: var(--s4);
+  padding-bottom: 0;
+}
+
+.rehab-page .page-header .lead { max-width: 68ch; }
+
+.rehab-page .disclaimer { margin-top: var(--s5); }
+
+.rehab-layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: var(--s4);
+  align-items: start;
+}
+
+.rehab-rail {
+  display: grid;
+  gap: var(--s2);
+  position: sticky;
+  top: calc(var(--nav-h) + var(--s3));
+}
+
+.rehab-case {
+  text-align: left;
+  font: inherit;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--s3) var(--s4);
+  cursor: pointer;
+}
+
+.rehab-case:hover { border-color: var(--border-hover); }
+
+.rehab-case:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.rehab-case small {
+  display: block;
+  color: var(--brand);
+  font-family: var(--font-head);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.rehab-case b { display: block; margin-top: 2px; font-weight: 600; }
+
+.rehab-case span {
+  display: block;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  margin-top: 4px;
+}
+
+.rehab-case[aria-pressed="true"] {
+  background: var(--brand-glow);
+  border-color: var(--brand);
+}
+
+.rehab-detail { display: grid; gap: var(--s4); min-width: 0; }
+
+.rehab-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--s5);
+}
+
+.rehab-side {
+  margin: 0;
+  color: var(--brand);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.rehab-panel h2 { font-size: var(--fs-xl); margin: var(--s2) 0; }
+
+.rehab-panel h3 { font-size: var(--fs-lg); margin: var(--s5) 0 var(--s2); }
+
+.rehab-id {
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+}
+
+.rehab-scores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  margin-top: var(--s4);
+}
+
+.rehab-score {
+  flex: 1 1 190px;
+  padding: var(--s3);
+  border-radius: var(--r-md);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+}
+
+.rehab-score b {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--brand);
+}
+
+.rehab-score span {
+  display: block;
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  margin-top: 4px;
+}
+
+.rehab-panel ul { margin: var(--s2) 0 0; padding-left: 1.15rem; }
+
+.rehab-panel li + li { margin-top: 6px; }
+
+.rehab-report {
+  margin: var(--s3) 0 0;
+  padding: var(--s3) var(--s4);
+  border-radius: var(--r-md);
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+}
+
+.rehab-report li { color: var(--text-primary); font-size: var(--fs-sm); }
+
+.rehab-follow { color: var(--text-secondary); margin: var(--s4) 0 0; }
+
+.rehab-warn {
+  margin-top: var(--s4);
+  padding: var(--s3) var(--s4);
+  border-radius: var(--r-md);
+  background: rgba(248, 113, 113, .08);
+  border: 1px solid rgba(248, 113, 113, .35);
+  color: #f4cfd2;
+}
+
+.rehab-set-head p { margin: 6px 0 0; color: var(--text-secondary); }
+
+.rehab-gifs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s3);
+  margin-top: var(--s4);
+}
+
+.rehab-gif {
+  background: #f4f7f8;
+  color: #1c2830;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.rehab-gif img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  display: block;
+  background: #f4f7f8;
+}
+
+.rehab-gif .body { padding: var(--s3) var(--s4) var(--s4); }
+
+.rehab-gif h3 {
+  font-size: 1.05rem;
+  margin: 0;
+  color: #102028;
+  letter-spacing: 0;
+}
+
+.rehab-dose {
+  color: #0e7c74;
+  margin: 4px 0 8px;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+
+.rehab-cap { margin: 8px 0 0; color: #3d4d58; font-size: var(--fs-sm); }
+
+.rehab-cap:first-of-type { margin-top: 0; }
+
+.rehab-guard { margin: 8px 0 0; color: #8a5a16; font-size: var(--fs-sm); }
+
+.rehab-credit {
+  color: var(--text-tertiary);
+  font-size: var(--fs-sm);
+  margin: var(--s6) 0 0;
+}
+
+@media (max-width: 980px) {
+  .rehab-layout,
+  .rehab-gifs { grid-template-columns: 1fr; }
+  .rehab-rail { position: static; }
+}

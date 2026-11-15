@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recovery plans — KneeGuard AI</title>
+  <meta name="description" content="Five course-example knee recovery plans. Each set follows the radiology report, and the pictures show bone and muscle moving with the exercise." />
+  <meta property="og:title" content="Recovery plans — KneeGuard AI" />
+  <meta property="og:description" content="Five example cases that pair a knee MRI report with a short exercise set." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/rehab.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html" aria-label="KneeGuard AI home">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 14c3-8 6-10 8-10s5 2 8 10"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        <span class="brand-text">
+          KneeGuard AI
+          <span class="brand-sub">Selected Topics · DS &amp; AI</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Problem</a></li>
+        <li><a href="data.html">Dataset</a></li>
+        <li><a href="map.html">Sites</a></li>
+        <li><a href="model.html">Model</a></li>
+        <li><a href="rehab.html" class="is-active" aria-current="page">Rehab</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="presentation/topic-problem-slides.html">Slides</a></li>
+        <li><a href="demo.html" class="nav-cta">Live Demo</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content" class="rehab-page">
+    <div class="page-container">
+      <section class="section" aria-labelledby="rehab-heading" style="border-bottom: none;">
+        <div class="page-header">
+          <p class="eyebrow">Exercise sets you can follow from the pictures</p>
+          <h1 id="rehab-heading">A recovery plan for each case</h1>
+          <p class="lead">
+            Choose a case on the left. The pictures on the right show bone and muscle moving with the exercise.
+            Read the words under each picture before you try it, because some cases must not follow the picture through the full range.
+          </p>
+          <p class="muted" style="margin-top: var(--s3); font-size: var(--fs-sm);">
+            Exercise content adapted from the group rehab page and kept inside the KneeGuard site.
+          </p>
+        </div>
+
+        <div class="disclaimer">
+          This page is a course example. It is not a physician’s order and it is not a diagnosis.
+          Stop and see a clinician if you feel a sharp pain, the knee locks and will not fully straighten, the joint is hot and swollen, or you cannot put weight on that leg.
+          These five cases are not tied to city pins on the map, because the files do not say which hospital performed the scan.
+        </div>
+
+        <div class="rehab-layout">
+          <aside class="rehab-rail" id="rehab-cases" aria-label="Choose a case"></aside>
+          <section class="rehab-detail" id="rehab-detail" aria-live="polite"></section>
+        </div>
+
+        <p class="rehab-credit">
+          The moving pictures were drawn to show bone and muscle at the knee, ankle, and thigh.
+          They show the direction the joint moves. They are not photographs from an image library.
+          The radiology notes were shortened into plain language.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">KneeGuard AI</p>
+        <p>Course project mockup for 1501418 Selected Topics in Data Science and AI.<br />
+        Static site — no backend, no database.</p>
+      </div>
+      <div>
+        <p class="footer-nav-label">Site pages</p>
+        <ul class="footer-links" role="list">
+          <li><a href="index.html">Problem overview</a></li>
+          <li><a href="data.html">Dataset &amp; data model</a></li>
+          <li><a href="map.html">Contributing sites</a></li>
+          <li><a href="model.html">Decision model</a></li>
+          <li><a href="rehab.html">Recovery plans</a></li>
+          <li><a href="demo.html">Proof-of-concept demo</a></li>
+          <li><a href="about.html">About the team</a></li>
+          <li><a href="presentation/topic-problem-slides.html">Topic &amp; problem slides</a></li>
+          <li><a href="references.html">References</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-nav-label">External links</p>
+        <ul class="footer-links" role="list">
+          <li><a href="https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/overview" target="_blank" rel="noopener">Kaggle competition</a></li>
+          <li><a href="https://www.rsna.org/artificial-intelligence/ai-image-challenge/knee-mri-ai-challenge" target="_blank" rel="noopener">RSNA challenge page</a></li>
+          <li><a href="https://github.com/Pnt-CoMExE/kneeguard-ai" target="_blank" rel="noopener">GitHub repository</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 KneeGuard AI project group · Mae Fah Luang University</span>
+      <span>MIT License · Static HTML/CSS/JS</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/rehab.js"></script>
+</body>
+</html>
