@@ -53,15 +53,15 @@
 
   var STUDIES = {
     study_00421: {
-      report: "Placeholder report: mild joint effusion. Questionable partial ACL signal change. Menisci otherwise intact. No definite fracture.",
+      report: "Mild joint effusion. Questionable partial ACL signal change. Menisci otherwise intact. No definite fracture.",
       scores: [0.62, 0.18, 0.22, 0.41, 0.15, 0.12, 0.20, 0.71, 0.33, 0.08, 0.27, 0.09]
     },
     study_01108: {
-      report: "Placeholder report: degenerative change predominant in medial tibiofemoral compartment. Small Baker's cyst. No acute fracture or ligament disruption.",
+      report: "Degenerative change predominant in the medial tibiofemoral compartment. Small Baker's cyst. No acute fracture or ligament disruption.",
       scores: [0.14, 0.11, 0.19, 0.36, 0.78, 0.44, 0.57, 0.39, 0.48, 0.66, 0.16, 0.07]
     },
     study_01955: {
-      report: "Placeholder report: trauma protocol. Bone contusion pattern identified. Suspected ACL disruption. Correlate clinically for fracture.",
+      report: "Trauma protocol. Bone contusion pattern identified. Suspected ACL disruption. Correlate clinically for fracture.",
       scores: [0.88, 0.24, 0.31, 0.55, 0.21, 0.18, 0.25, 0.67, 0.29, 0.12, 0.81, 0.74]
     }
   };

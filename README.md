@@ -64,7 +64,6 @@ This repo is configured to publish from the **`/docs`** folder on the default br
 
 ## Notes
 
-- Yellow **PLACEHOLDER** / **TBD** markers are intentional until teammate research content arrives.
 - The demo page uses simulated probabilities only — not a trained model.
 - Course PDF lives in `course/` so it is versioned in git but separate from the published site entry pages.
 

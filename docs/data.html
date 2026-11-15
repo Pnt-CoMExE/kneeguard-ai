@@ -33,7 +33,6 @@
         <li><a href="model.html">Model</a></li>
         <li><a href="rehab.html">Rehab</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="presentation/topic-problem-slides.html">Slides</a></li>
         <li><a href="demo.html" class="nav-cta">Live Demo</a></li>
       </ul>
     </div>
@@ -47,7 +46,6 @@
         <h1>Dataset &amp; data model</h1>
         <p class="lead">
           Public competition dataset pairing knee MRI DICOM studies with multilingual radiology reports across twelve abnormality labels.
-          Figures marked <span class="placeholder">PLACEHOLDER</span> will be completed by the team.
         </p>
         <p style="margin-top: var(--s4);">
           <a class="btn btn-ghost" href="map.html">Open contributing-sites map</a>
@@ -67,13 +65,11 @@
               <tr><td>Dataset name</td><td>RSNA Knee Abnormality Detection</td></tr>
               <tr><td>Dataset provider / owner</td><td>Radiological Society of North America (RSNA) via Kaggle</td></tr>
               <tr><td>Source / URL</td><td><a href="https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/data" target="_blank" rel="noopener">kaggle.com/competitions/rsna-knee-abnormality-detection/data</a></td></tr>
-              <tr><td>Data-collection period</td><td><span class="placeholder">PLACEHOLDER</span></td></tr>
               <tr><td>Number of records</td><td>~5,000+ MRI exams (train); ~1,300 studies in test set</td></tr>
               <tr><td>Number of attributes / targets</td><td>12 binary labels + DICOM series + radiology report text (train only)</td></tr>
               <tr><td>Data format</td><td>DICOM series per study; CSV metadata; plain-text radiology reports</td></tr>
               <tr><td>Target variable(s)</td><td>Per-study probability for each of 12 knee findings</td></tr>
               <tr><td>License / usage conditions</td><td>Subject to Kaggle / RSNA competition rules</td></tr>
-              <tr><td>Date accessed</td><td><span class="placeholder">PLACEHOLDER</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -94,9 +90,6 @@
             <p class="muted">
               Diversity across scanners, protocols, languages, and 19 sites strengthens external validity
               but also introduces domain shift between train, public, and private test splits.
-            </p>
-            <p class="muted" style="font-size:var(--fs-sm);">
-              <span class="placeholder">PLACEHOLDER</span> — Add team notes on completeness, population coverage, and bias after EDA.
             </p>
           </div>
           <div>
@@ -149,17 +142,13 @@
             </tbody>
           </table>
         </div>
-        <p class="muted" style="margin-top:12px; font-size:var(--fs-xs);">
-          * Exact official column names will be confirmed against the competition CSV schema.
-          <span class="placeholder">PLACEHOLDER</span> for final column list from teammate extraction.
-        </p>
       </section>
 
       <!-- Data quality -->
       <section class="section" aria-labelledby="quality-heading">
         <div class="section-header">
           <h2 id="quality-heading">Data quality &amp; preprocessing plan</h2>
-          <p>Issues to examine and planned handling — editable before submission.</p>
+          <p>Issues to examine and planned handling.</p>
         </div>
         <div class="table-wrap">
           <table>
@@ -179,7 +168,7 @@
               <tr>
                 <td>Class imbalance</td>
                 <td>Prevalence histogram per finding</td>
-                <td>Class weights / focal loss / stratified sampling — <span class="placeholder">TBD</span></td>
+                <td>Class weights, focal loss, or stratified sampling</td>
               </tr>
               <tr>
                 <td>Intensity / protocol shift</td>
@@ -199,82 +188,10 @@
               <tr>
                 <td>Multilingual reports</td>
                 <td>Language distribution across sites</td>
-                <td>Multilingual encoder or machine-translation pipeline — <span class="placeholder">TBD</span></td>
+                <td>Multilingual encoder or a machine-translation pipeline</td>
               </tr>
             </tbody>
           </table>
-        </div>
-      </section>
-
-      <!-- EDA -->
-      <section class="section" aria-labelledby="eda-heading">
-        <div class="section-header">
-          <h2 id="eda-heading">Exploratory data analysis</h2>
-          <p>At least three analyses with titles, labels, and decision-relevant interpretation. Charts below are illustrative placeholders — replace with actual exports.</p>
-        </div>
-
-        <div class="col-3">
-          <!-- Chart 1 -->
-          <article class="card" aria-labelledby="chart1-title">
-            <h3 id="chart1-title">Fig 1 — Finding prevalence (mock)</h3>
-            <p class="muted" style="font-size:var(--fs-xs); margin-bottom:var(--s4);">
-              Positive-label rate per finding across labelled training studies.
-            </p>
-            <div class="chart-wrap">
-              <div class="bar-chart-row"><span class="bar-chart-label">Joint effusion</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:68%"></div></div><span class="bar-chart-val">68%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">Meniscus</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:54%"></div></div><span class="bar-chart-val">54%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">OA patellofem.</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:50%"></div></div><span class="bar-chart-val">50%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">OA medial TF</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:45%"></div></div><span class="bar-chart-val">45%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">Synovitis</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:38%"></div></div><span class="bar-chart-val">38%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">ACL</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:30%"></div></div><span class="bar-chart-val">30%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">Bone contusion</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:22%"></div></div><span class="bar-chart-val">22%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">Baker's cyst</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:18%"></div></div><span class="bar-chart-val">18%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">Fracture</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:8%"></div></div><span class="bar-chart-val">8%</span></div>
-            </div>
-            <p class="muted" style="margin-top:var(--s4); font-size:var(--fs-xs);">
-              <strong style="color:var(--text-primary)">Interpretation:</strong> Fracture and Baker's cyst are rare classes. This motivates macro-averaged AUC (not accuracy) and class-aware training.<br />
-              <span class="placeholder">PLACEHOLDER</span> — Replace with real counts.
-            </p>
-          </article>
-
-          <!-- Chart 2 -->
-          <article class="card" aria-labelledby="chart2-title">
-            <h3 id="chart2-title">Fig 2 — Studies per site (mock)</h3>
-            <p class="muted" style="font-size:var(--fs-xs); margin-bottom:var(--s4);">
-              Distribution of training exams across international imaging sites.
-            </p>
-            <div class="chart-wrap">
-              <div class="bar-chart-row"><span class="bar-chart-label">Site A</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:72%"></div></div><span class="bar-chart-val">720</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">Site B</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:58%"></div></div><span class="bar-chart-val">580</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">Site C</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:46%"></div></div><span class="bar-chart-val">460</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">Site D</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:38%"></div></div><span class="bar-chart-val">380</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">Site E</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:30%"></div></div><span class="bar-chart-val">300</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">Others (14)</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:52%"></div></div><span class="bar-chart-val">1 560</span></div>
-            </div>
-            <p class="muted" style="margin-top:var(--s4); font-size:var(--fs-xs);">
-              <strong style="color:var(--text-primary)">Interpretation:</strong> Large site-size imbalance. Site-stratified validation splits are needed to avoid leakage from dominant sites.<br />
-              <span class="placeholder">PLACEHOLDER</span> — Replace with real site counts.
-            </p>
-          </article>
-
-          <!-- Chart 3 -->
-          <article class="card" aria-labelledby="chart3-title">
-            <h3 id="chart3-title">Fig 3 — Labels per study (mock)</h3>
-            <p class="muted" style="font-size:var(--fs-xs); margin-bottom:var(--s4);">
-              Number of positive labels per study across labelled training set.
-            </p>
-            <div class="chart-wrap">
-              <div class="bar-chart-row"><span class="bar-chart-label">0 findings</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:14%"></div></div><span class="bar-chart-val">14%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">1 finding</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:25%"></div></div><span class="bar-chart-val">25%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">2 findings</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:28%"></div></div><span class="bar-chart-val">28%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">3 findings</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:18%"></div></div><span class="bar-chart-val">18%</span></div>
-              <div class="bar-chart-row"><span class="bar-chart-label">4+ findings</span><div class="bar-chart-track"><div class="bar-chart-fill" style="width:15%"></div></div><span class="bar-chart-val">15%</span></div>
-            </div>
-            <p class="muted" style="margin-top:var(--s4); font-size:var(--fs-xs);">
-              <strong style="color:var(--text-primary)">Interpretation:</strong> Most studies contain 1–3 concurrent findings. True multilabel modelling (not one-vs-rest) is appropriate.<br />
-              <span class="placeholder">PLACEHOLDER</span> — Replace with real label-count histogram.
-            </p>
-          </article>
         </div>
       </section>
 
@@ -334,7 +251,6 @@
           <li><a href="rehab.html">Recovery plans</a></li>
           <li><a href="demo.html">Proof-of-concept demo</a></li>
           <li><a href="about.html">About the team</a></li>
-          <li><a href="presentation/topic-problem-slides.html">Topic &amp; problem slides</a></li>
           <li><a href="references.html">References</a></li>
         </ul>
       </div>

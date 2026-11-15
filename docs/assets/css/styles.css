@@ -145,15 +145,6 @@ h1,h2,h3,h4 { font-family: var(--font-head); line-height: 1.15; margin: 0 0 var(
 .badge-ok    { border-color: rgba(52,211,153,.3); color: var(--ok); background: rgba(52,211,153,.08); }
 .badge-warn  { border-color: rgba(251,191,36,.3); color: var(--warn); background: rgba(251,191,36,.08); }
 
-.placeholder {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 2px 8px; border-radius: var(--r-sm);
-  font-size: var(--fs-xs); font-weight: 600;
-  background: rgba(251,191,36,.10);
-  border: 1px dashed rgba(251,191,36,.35);
-  color: var(--warn);
-}
-
 /* ─── Buttons ────────────────────────────────────── */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);

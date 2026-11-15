@@ -33,7 +33,6 @@
         <li><a href="model.html" class="is-active" aria-current="page">Model</a></li>
         <li><a href="rehab.html">Rehab</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="presentation/topic-problem-slides.html">Slides</a></li>
         <li><a href="demo.html" class="nav-cta">Live Demo</a></li>
       </ul>
     </div>
@@ -47,7 +46,6 @@
         <h1>Decision model design</h1>
         <p class="lead">
           Multilabel classification with optional multimodal training. Outputs become triage decisions under human oversight.
-          Details marked <span class="placeholder">PLACEHOLDER</span> await teammate research.
         </p>
       </div>
 
@@ -69,10 +67,6 @@
               Clustering does not produce calibrated finding probabilities. A single-output regression cannot express
               the twelve-label clinical structure evaluated by macro-AUC. Multilabel classification aligns directly with the task.
             </p>
-            <div class="callout">
-              <span class="placeholder">PLACEHOLDER</span> — Final backbone (2.5D CNN, transformer, ensemble)
-              and baseline comparison table from teammate experiments.
-            </div>
           </div>
           <div>
             <div class="section-header"><h2>Candidate approaches</h2></div>
@@ -104,7 +98,7 @@
             <tbody>
               <tr><td><strong>Model users</strong></td><td>Radiologists, triage coordinators, clinical AI reviewers</td></tr>
               <tr><td><strong>Input</strong></td><td>Knee MRI DICOM series for one study (no report at inference time)</td></tr>
-              <tr><td><strong>Processing</strong></td><td>Preprocess → encode series → study aggregation → 12 multilabel heads <span class="placeholder">algorithm TBD</span></td></tr>
+              <tr><td><strong>Processing</strong></td><td>Preprocess → encode series → study aggregation → 12 multilabel heads</td></tr>
               <tr><td><strong>Output</strong></td><td>Twelve probabilities in [0, 1] for clinically important findings</td></tr>
               <tr><td><strong>Decision</strong></td><td>Triage priority level (Low / Medium / High) and focus findings</td></tr>
               <tr><td><strong>Action</strong></td><td>Human radiologist reviews, confirms or overrides, and documents finding pathway</td></tr>
@@ -137,8 +131,8 @@
       <!-- Technical design -->
       <section class="section" aria-labelledby="technical-heading">
         <div class="section-header">
-          <h2 id="technical-heading">Technical design (draft)</h2>
-          <p>Confirm values with teammate experiments before submission.</p>
+          <h2 id="technical-heading">Technical design</h2>
+          <p>Specification of the planned model.</p>
         </div>
         <div class="table-wrap">
           <table>
@@ -146,10 +140,8 @@
             <tbody>
               <tr><td>Input features</td><td>MRI series tensors / embeddings; optional train-time report embeddings</td></tr>
               <tr><td>Target variables</td><td>12 binary abnormality labels (multilabel)</td></tr>
-              <tr><td>Selected algorithm</td><td><span class="placeholder">PLACEHOLDER</span> — teammate final choice</td></tr>
               <tr><td>Baseline method</td><td>Prevalence predictor; simple CNN study aggregator</td></tr>
               <tr><td>Train / val / test strategy</td><td>Competition splits + internal group-aware CV on labelled train</td></tr>
-              <tr><td>Hyperparameters</td><td><span class="placeholder">PLACEHOLDER</span> — learning rate, sampling, loss weights</td></tr>
               <tr><td>Expected output</td><td><code>submission.csv</code> with study-level probabilities for 12 findings</td></tr>
             </tbody>
           </table>
@@ -169,12 +161,6 @@
               <li>Efficiency track: predictive performance vs GPU runtime (if pursued)</li>
               <li>Decision-support usefulness rated by clinician partners</li>
             </ul>
-            <div class="callout">
-              <strong>Draft success criterion:</strong>
-              The model is considered successful if macro AUC-ROC ≥ <span class="placeholder">TBD</span>
-              and at least <span class="placeholder">80%</span> of reviewed triage recommendations
-              are judged clinically useful by test reviewers.
-            </div>
           </div>
           <div>
             <div class="section-header">
@@ -257,7 +243,6 @@
           <li><a href="rehab.html">Recovery plans</a></li>
           <li><a href="demo.html">Proof-of-concept demo</a></li>
           <li><a href="about.html">About the team</a></li>
-          <li><a href="presentation/topic-problem-slides.html">Topic &amp; problem slides</a></li>
           <li><a href="references.html">References</a></li>
         </ul>
       </div>
