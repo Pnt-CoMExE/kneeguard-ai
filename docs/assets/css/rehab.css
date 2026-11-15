@@ -8,8 +8,6 @@
 
 .rehab-page .page-header .lead { max-width: 68ch; }
 
-.rehab-page .disclaimer { margin-top: var(--s5); }
-
 .rehab-layout {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);

@@ -355,7 +355,7 @@ main { position: relative; z-index: 1; }
 .stat-label { font-size: 0.78rem; color: var(--text-secondary); letter-spacing: .04em; text-transform: uppercase; }
 
 /* ─── Pipeline strip ─────────────────────────────── */
-.pipeline { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--border); border-radius: var(--r-lg); overflow: hidden; }
+.pipeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border-radius: var(--r-lg); overflow: hidden; }
 .pipeline-step {
   background: var(--bg-card); padding: var(--s4) var(--s3);
   text-align: center; font-size: 0.9rem; font-weight: 600;

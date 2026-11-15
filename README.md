@@ -24,7 +24,7 @@ After GitHub Pages is enabled:
 │   ├── index.html                  # Problem (Part 1)
 │   ├── data.html                   # Dataset & data model (Part 2)
 │   ├── model.html                  # Decision model (Part 3)
-│   ├── demo.html                   # Proof-of-concept UI
+│   ├── rehab.html                  # Recovery plans
 │   └── assets/
 │       ├── css/styles.css
 │       └── js/main.js
@@ -64,7 +64,6 @@ This repo is configured to publish from the **`/docs`** folder on the default br
 
 ## Notes
 
-- The demo page uses simulated probabilities only — not a trained model.
 - Course PDF lives in `course/` so it is versioned in git but separate from the published site entry pages.
 
 ## Course mapping
@@ -74,7 +73,7 @@ This repo is configured to publish from the **`/docs`** folder on the default br
 | `docs/index.html` | Part 1 · Problem identification |
 | `docs/data.html` | Part 2 · Dataset and data model |
 | `docs/model.html` | Part 3 · Proposed decision model |
-| `docs/demo.html` | Proof of concept / UI prototype |
+| `docs/rehab.html` | Recovery plans |
 
 ## License
 
